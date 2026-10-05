@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invent Fine Art | Sculptures, Wall Murals, GRC Facades &amp; Water Fountains – Mumbai</title>
+    <meta name="description" content="Invent Fine Art – ISO 9001:2008 certified maker &amp; installer of sculptures, murals, GRC facades, fountains &amp; architectural art in Mumbai since 2008." />
+    <meta name="theme-color" content="#0e0d0c" />
+    <link rel="canonical" href="https://www.inventfineart.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.inventfineart.com/" />
+    <meta property="og:title" content="Invent Fine Art | Sculptures, Wall Murals, GRC Facades &amp; Water Fountains – Mumbai" />
+    <meta property="og:description" content="ISO 9001:2008 certified maker &amp; installer of bespoke sculptures, wall murals, GRC facades &amp; fountains in Mumbai since 2008." />
+    <meta property="og:image" content="https://www.inventfineart.com/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.inventfineart.com/" />
+    <meta name="twitter:title" content="Invent Fine Art | Sculptures, Wall Murals, GRC Facades &amp; Water Fountains – Mumbai" />
+    <meta name="twitter:description" content="ISO 9001:2008 certified maker &amp; installer of bespoke sculptures, wall murals, GRC facades &amp; fountains in Mumbai since 2008." />
+    <meta name="twitter:image" content="https://www.inventfineart.com/og-image.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Fonts (Fraunces + Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,400&family=Inter:wght@400;500;600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,400&family=Inter:wght@400;500;600&display=swap"
+      />
+    </noscript>
+
+    <!-- Home only: preload the first hero image and paint it from static markup so LCP does not wait
+         for the JS bundle. React replaces the contents of #root when it mounts. -->
+    <script>
+      if (location.pathname === '/') {
+        var set = '/assets/hero/banner-1-960.webp 960w, /assets/hero/banner-1.webp 1920w';
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'image';
+        l.type = 'image/webp';
+        l.setAttribute('imagesrcset', set);
+        l.setAttribute('imagesizes', '100vw');
+        l.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(l);
+        document.addEventListener('DOMContentLoaded', function () {
+          var root = document.getElementById('root');
+          if (!root || root.firstChild) return;
+          root.innerHTML =
+            '<div aria-hidden="true" style="position:relative;min-height:88vh;overflow:hidden;background:#0e0d0c">' +
+            '<img src="/assets/hero/banner-1.webp" srcset="' + set + '" sizes="100vw" alt="" fetchpriority="high" ' +
+            'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%">' +
+            '<div style="position:absolute;inset:0;background:linear-gradient(to top,#0e0d0c,rgba(14,13,12,.6),transparent)"></div>' +
+            '<div style="position:absolute;inset:0;background:rgba(91,48,0,.35);mix-blend-mode:multiply"></div></div>';
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+export const services = [
+  {
+    id: 'murals',
+    slug: 'wall-murals',
+    category: 'wall-murals',
+    num: '01',
+    title: 'Wall Murals',
+    image: '/assets/services/19.webp',
+    summary:
+      'Great Material, great selection, great value. When it comes to selection, no one offers more murals and decorative wall treatments for decorating your residential and corporate workspaces.',
+    applications: [
+      'Hotels & hospitality suites',
+      'Luxury residences & villas',
+      'Corporate office lobbies',
+      'Reception feature walls',
+      'Fine dining restaurants',
+    ],
+    materials: [
+      'Glass Reinforced Concrete (GRC)',
+      'FRP / Fiberglass composites',
+      'Cast metal alloys & bronze finish',
+      'Terracotta & hand-glazed ceramic',
+      'Composite acrylic & wooden relief',
+    ],
+  },
+  {
+    id: 'grills',
+    slug: 'gate-grills',
+    category: 'grc-products',
+    num: '02',
+    title: 'Gate Grills',
+    image: '/assets/services/14.webp',
+    summary:
+      'Our product range is designed and fabricated using supreme quality material. The exotic designs, aesthetic patterns, and artistic looks of these grills make them ideal for architectural applications.',
+    applications: [
+      'Grand entrance gates',
+      'Balcony & terrace railings',
+      'Perimeter security fencing',
+      'Boundary screen panels',
+      'Pergolas & canopy screens',
+    ],
+    materials: [
+      'Precision cast metal',
+      'Hand-forged wrought iron',
+      'High-grade stainless steel',
+      'Intricate GRC tracery jali grills',
+    ],
+  },
+  {
+    id: 'rockery',
+    slug: 'artificial-rockery',
+    category: 'other',
+    num: '03',
+    title: 'Artificial Rockery',
+    image: '/assets/services/11.webp',
+    summary:
+      "Rockery Art satisfies people's desire to return to Nature by offering them stone fragments from Nature. Natural stones and artificial rockery work for gardens, water bodies, and landscapes.",
+    applications: [
+      'Garden landscape masterplans',
+      'Internal & external courtyards',
+      'Terrace & penthouse garden rockscapes',
+      'Resort pool & cascade accents',
+      'Eco-parks & theme installations',
+    ],
+    materials: [
+      'Ultra-realistic stone texture & patina',
+      'Weatherproof & UV-stable mineral coatings',
+      'Lightweight fiberglass / ferro-cement core',
+      'Integrated natural stone boulder finishes',
+    ],
+  },
+  {
+    id: 'fountains',
+    slug: 'water-fountains',
+    category: 'water-fountains',
+    num: '04',
+    title: 'Water Fountains',
+    image: '/assets/services/7.webp',
+    summary:
+      'Totally unique, fountain technologies specialize in only fountains and dramatic water features. We plan, engineer, and build stunning indoor and outdoor water bodies and fountains.',
+    applications: [
+      'Central atrium water bodies',
+      'Courtyard focal points',
+      'Corporate business parks',
+      'Residential estate gardens',
+      'Five-star hotel lobbies',
+    ],
+    materials: [
+      'Architectural sheet waterfalls & cascades',
+      'Precision laminar flow & frothy jets',
+      'Reflecting shallow pools',
+      'Centerpiece sculptural fountain bodies',
+      'Low-maintenance recirculating pump systems',
+    ],
+  },
+  {
+    id: 'sculptures',
+    slug: 'sculptures-art-installation',
+    category: 'sculptures',
+    num: '05',
+    title: 'Sculptures Art Installation',
+    image: '/assets/services/5.webp',
+    summary:
+      'Indoor and Outdoor Sculpture for home and garden decoration. The presence of sculpture adds a touch of prestige, luxury, and artistic gravity to any architectural space.',
+    applications: [
+      'Corporate headquarters & plazas',
+      'Public roundabouts & urban landmarks',
+      'Luxury hotel lobbies & galleries',
+      'Private estate gardens & promenades',
+      'Art exhibitions & bespoke commissions',
+    ],
+    materials: [
+      'Cast bronze & antique patinas',
+      'Spun brass & copper alloys',
+      'Marine-grade stainless steel',
+      'Hand-carved natural stone & marble',
+      'FRP and mixed contemporary media',
+    ],
+  },
+  {
+    id: 'facades',
+    slug: 'architectural-facades',
+    category: 'grc-products',
+    num: '06',
+    title: 'Architectural Facades',
+    image: '/assets/services/2.webp',
+    summary:
+      'Invent Fine Art brings together all the elements to help you create stunning architectural wall and facade solutions that redefine structural elegance.',
+    applications: [
+      'Exterior building envelopes',
+      'Monolithic feature facade walls',
+      'Decorative architectural cladding',
+      'Louvered screen walls & jalis',
+      'Passive solar sunshades & fins',
+    ],
+    materials: [
+      'Glass Reinforced Concrete (GRC) panels',
+      'Precision CNC-perforated metal panels',
+      '3D sculptural modular tiles',
+      'Engineered sub-frame structural anchors',
+    ],
+  },
+  {
+    id: 'planters',
+    slug: 'planters',
+    category: 'planters',
+    num: '07',
+    title: 'Planters',
+    image: '/assets/services/ser.webp',
+    summary:
+      'Using indoor & outdoor planters is the perfect way to create beautiful container gardens for your front porch, patio, terrace, or corporate lobby.',
+    applications: [
+      'Rooftop sky terraces',
+      'Executive boardroom corridors',
+      'Landscaped estate walkways',
+      'Luxury private villas & balconies',
+      'Commercial building reception areas',
+    ],
+    materials: [
+      'Rust-proof & corrosion-resistant alloys',
+      'UV-stabilized weather-resistant polymers',
+      'Reinforced high-load capacity cores',
+      'Contemporary minimalist & classical urn styles',
+    ],
+  },
+];
+
+export default services;

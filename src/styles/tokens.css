@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* Single source of design tokens (Tailwind v4). Components use token utilities only. */
+@theme {
+  --color-bg: #0e0d0c;
+  --color-bg-raised: #171513;
+  --color-line: #2a2622;
+  --color-text: #f1ebe2;
+  --color-text-dim: #a89f93;
+  --color-accent: #b93a25;        /* CTA fill: 4.8:1 with --color-text */
+  --color-accent-hover: #a3321f;
+  --color-accent-light: #e2705a;  /* accent as TEXT on dark backgrounds (≥4.5:1) */
+  --color-accent-2: #b98a4e;
+  --color-light-card: #f4f0ea;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-image: 2px;
+  --radius-pill: 999px;
+
+  --ease-custom: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Non-token values only (no colour/font/radius/easing duplicates). */
+:root {
+  --container-max: 1280px;
+  --nav-height: 72px;
+}
