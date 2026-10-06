@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { ArrowIcon } from './Icons';
+import SmartImage from './SmartImage';
 
 const listItem = "py-2.5 text-sm text-text-dim flex items-start gap-2 before:content-['—'] before:text-accent-2";
 
@@ -19,8 +20,8 @@ function TextList({ title, items }) {
 export function ServiceDetail({ service, imageClass = 'aspect-[16/10]' }) {
   return (
     <div className="flex flex-col gap-8">
-      <div className={`w-full ${imageClass} rounded-[2px] overflow-hidden bg-bg-raised`}>
-        <img src={service.image} alt={service.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+      <div className={`w-full ${imageClass} rounded-[2px] overflow-hidden`}>
+        <SmartImage src={service.image} alt={service.title} />
       </div>
       <div className="flex flex-col gap-6">
         <div className="flex items-baseline gap-3">

@@ -5,6 +5,7 @@ import services from '../data/services';
 import { galleryCategories } from '../data/categories';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import { useReveal } from '../hooks/useReveal';
+import MapEmbed from './MapEmbed';
 
 const EMPTY_FORM = { name: '', phone: '', email: '', service: '', message: '', artworkRef: '', _hp: '' };
 
@@ -370,22 +371,7 @@ export function ContactForm() {
               </div>
             </div>
 
-            {/* Google Maps Embed with Dark Aesthetic Filter */}
-            <div className="relative w-full aspect-[4/3] rounded-[2px] overflow-hidden border border-line bg-bg-raised">
-              <iframe
-                title="Invent Fine Art Studio Location"
-                src={siteData.contact.googleMapsEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{
-                  border: 0,
-                  filter: 'grayscale(90%) invert(92%) contrast(85%)',
-                }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+            <MapEmbed />
           </div>
         </div>
       </div>

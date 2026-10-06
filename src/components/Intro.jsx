@@ -1,8 +1,9 @@
 import siteData from '../data/site';
 import { useReveal } from '../hooks/useReveal';
+import HoverPreviewText from './HoverPreviewText';
 
 export function Intro() {
-  const { eyebrow, title, quote, features } = siteData.intro;
+  const { eyebrow, title, quoteParts, previews, features } = siteData.intro;
   const revealRef = useReveal();
 
   return (
@@ -16,8 +17,8 @@ export function Intro() {
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-text font-normal mb-6">
             {title}
           </h2>
-          <blockquote className="font-display text-2xl sm:text-3xl md:text-4xl text-text font-light leading-snug md:leading-relaxed text-pretty">
-            &ldquo;{quote}&rdquo;
+          <blockquote className="font-display text-2xl sm:text-3xl md:text-4xl text-text-dim font-light leading-snug md:leading-relaxed text-pretty">
+            &ldquo;<HoverPreviewText parts={quoteParts} previews={previews} />&rdquo;
           </blockquote>
         </div>
 

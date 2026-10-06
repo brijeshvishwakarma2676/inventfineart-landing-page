@@ -1,31 +1,102 @@
 {
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/about-us.html", "destination": "/about", "permanent": true },
-    { "source": "/services.html", "destination": "/services", "permanent": true },
-    { "source": "/gallery.html", "destination": "/gallery", "permanent": true },
-    { "source": "/sculptures.html", "destination": "/gallery/sculptures", "permanent": true },
-    { "source": "/wall_murals.html", "destination": "/gallery/wall-murals", "permanent": true },
-    { "source": "/water_fountains.html", "destination": "/gallery/water-fountains", "permanent": true },
-    { "source": "/grc-products.html", "destination": "/gallery/grc-products", "permanent": true },
-    { "source": "/planter.html", "destination": "/gallery/planters", "permanent": true },
-    { "source": "/other.html", "destination": "/gallery/other", "permanent": true },
-    { "source": "/our_client.html", "destination": "/clients", "permanent": true },
-    { "source": "/contact-us.html", "destination": "/contact", "permanent": true }
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/services.html",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/gallery.html",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/sculptures.html",
+      "destination": "/gallery/sculptures",
+      "permanent": true
+    },
+    {
+      "source": "/wall_murals.html",
+      "destination": "/gallery/wall-murals",
+      "permanent": true
+    },
+    {
+      "source": "/water_fountains.html",
+      "destination": "/gallery/water-fountains",
+      "permanent": true
+    },
+    {
+      "source": "/grc-products.html",
+      "destination": "/gallery/grc-products",
+      "permanent": true
+    },
+    {
+      "source": "/planter.html",
+      "destination": "/gallery/planters",
+      "permanent": true
+    },
+    {
+      "source": "/other.html",
+      "destination": "/gallery/other",
+      "permanent": true
+    },
+    {
+      "source": "/our_client.html",
+      "destination": "/clients",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us.html",
+      "destination": "/contact",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/((?!assets/|.*\\..*).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!assets/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
     }
   ]

@@ -52,6 +52,29 @@ export const galleryCategories = [
   },
 ].map((c) => ({ ...c, count: categoryCounts[c.key] || 0 }));
 
+// "Quick browse" sentence on /gallery: category names open a cover preview (see HoverPreviewText).
+export const galleryLeadParts = [
+  'Start with our ',
+  { key: 'sculptures', text: 'sculptures' },
+  ', ',
+  { key: 'wall-murals', text: 'wall murals' },
+  ' or ',
+  { key: 'water-fountains', text: 'water fountains' },
+  ', then explore ',
+  { key: 'grc-products', text: 'GRC products' },
+  ', ',
+  { key: 'planters', text: 'planters' },
+  ' and our artistic and ',
+  { key: 'other', text: 'rockery creations' },
+  '.',
+];
+export const galleryLeadPreviews = Object.fromEntries(
+  galleryCategories.map((c) => [
+    c.slug,
+    { image: c.cover, title: c.label, subtitle: `${c.count} works`, to: `/gallery/${c.slug}`, linkLabel: `View ${c.label}` },
+  ]),
+);
+
 export const getCategory = (slug) => galleryCategories.find((c) => c.slug === slug);
 
 export { totalWorksCount };

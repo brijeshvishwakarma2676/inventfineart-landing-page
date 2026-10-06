@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import SmartImage from './SmartImage';
 
 const columnsFor = (width) => (width >= 1024 ? 4 : width >= 640 ? 3 : 2);
 
@@ -38,20 +39,13 @@ export function MasonryGrid({ items, onOpen }) {
               <button
                 key={item.id}
                 type="button"
-                className="group block w-full relative overflow-hidden rounded-[2px] bg-bg-raised cursor-pointer p-0 text-left"
+                className="group block w-full relative overflow-hidden rounded-[2px] cursor-pointer p-0 text-left"
                 onClick={() => onOpen(index)}
                 aria-label={`Open ${item.alt}`}
               >
-                <img
-                  src={item.thumb}
-                  alt={item.alt}
-                  width={item.w}
-                  height={item.h}
-                  loading={eager ? 'eager' : 'lazy'}
-                  fetchPriority={eager ? 'high' : 'auto'}
-                  decoding="async"
-                  className="w-full h-auto block transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-                />
+                <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+                  <SmartImage src={item.thumb} alt={item.alt} width={item.w} height={item.h} lqip={item.lqip} priority={eager} className="w-full" />
+                </div>
                 <span className="pointer-events-none absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-bg/85 to-transparent opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 font-body text-xs font-semibold uppercase tracking-wider text-text">
                   #{item.n}
                 </span>

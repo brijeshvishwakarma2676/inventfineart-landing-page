@@ -32,7 +32,7 @@ Contrast: `--text` on `--bg` ≈ 16:1; `--text-dim` on `--bg` ≈ 7:1; white on 
 | Body | Inter | 400, 500 | 17px / 16px, line-height 1.65 |
 | Eyebrow / label | Inter | 600, uppercase, +0.14em tracking | 12px |
 
-Fonts via Google Fonts with `display=swap`, subset to Latin (self-host later if needed).
+Fonts are **self-hosted** (`public/fonts/*.woff2`, Latin subset, OFL) via `@font-face` in `styles/base.css` with `font-display: swap` — no third-party font request and no late font swap shifting layout (CLS 0 on the Gallery hub after the change).
 
 ## 4. Spacing, shape, motion
 - Spacing scale: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 72 · 112 · 160.

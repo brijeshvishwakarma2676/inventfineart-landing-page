@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import RootLayout from './layouts/RootLayout';
 import Home from './pages/Home';
+import PageSkeleton from './components/PageSkeleton';
 
 // Home ships with the entry bundle (LCP page); every other page is its own lazy chunk.
 const page = (load) => async () => ({ Component: (await load()).default });
@@ -8,7 +9,7 @@ const page = (load) => async () => ({ Component: (await load()).default });
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
-    hydrateFallbackElement: <div className="min-h-screen bg-bg" aria-busy="true" />,
+    hydrateFallbackElement: <PageSkeleton />,
     children: [
       { path: '/', element: <Home /> },
       { path: '/about', lazy: page(() => import('./pages/About')) },

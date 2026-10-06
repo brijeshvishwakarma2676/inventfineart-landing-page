@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import siteData from '../data/site';
 import { ArrowIcon } from './Icons';
+import { lqip } from '../data/lqip';
 
 export function Hero() {
   const { slides, stats, eyebrow } = siteData.hero;
@@ -43,7 +44,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden pt-[72px] bg-bg select-none"
+      className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden pt-[var(--header-h)] bg-bg select-none"
       aria-label="Hero Showcase"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -64,6 +65,7 @@ export function Hero() {
               className={`absolute inset-0 transition-opacity duration-1000 ease-out overflow-hidden ${
                 isActive ? 'opacity-100 visible z-10' : 'opacity-0 invisible z-0'
               }`}
+              style={lqip[slide.image] ? { backgroundImage: `url(${lqip[slide.image]})`, backgroundSize: 'cover', backgroundPosition: 'center 35%' } : undefined}
               aria-hidden={!isActive}
             >
               <img

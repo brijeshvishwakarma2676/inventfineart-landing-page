@@ -1,5 +1,8 @@
 import { Link } from 'react-router';
-import { galleryCategories, totalWorksCount } from '../data/categories';
+import { galleryCategories, galleryLeadParts, galleryLeadPreviews, totalWorksCount } from '../data/categories';
+import HoverPreviewText from '../components/HoverPreviewText';
+import SmartImage from '../components/SmartImage';
+import ImmersiveGallery from '../components/ImmersiveGallery';
 import PageHeader from '../components/PageHeader';
 import CtaBand from '../components/CtaBand';
 import usePageMeta from '../hooks/usePageMeta';
@@ -8,8 +11,10 @@ import { pageMeta } from '../data/seo';
 function Cover({ slug, className, objectPos = 'object-center' }) {
   const cat = galleryCategories.find((c) => c.slug === slug);
   return (
-    <Link to={`/gallery/${cat.slug}`} className={`group relative block overflow-hidden rounded-[2px] bg-bg-raised ${className}`}>
-      <img src={cat.cover} alt={`${cat.label} — cover`} className={`w-full h-full object-cover ${objectPos} transition-transform duration-700 ease-out group-hover:scale-[1.02]`} loading="lazy" decoding="async" />
+    <Link to={`/gallery/${cat.slug}`} className={`group relative block overflow-hidden rounded-[2px] ${className}`}>
+      <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.02]">
+        <SmartImage src={cat.cover} alt={`${cat.label} — cover`} imgClassName={objectPos} />
+      </div>
       <span className="absolute inset-x-0 bottom-0 p-5 md:p-6 bg-gradient-to-t from-bg via-bg/70 to-transparent pt-16 flex flex-col items-start gap-1 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
         <span className="font-display text-2xl md:text-3xl text-text">{cat.label}</span>
         <span className="font-body text-xs uppercase tracking-wider text-text">{cat.count} works</span>
@@ -30,6 +35,15 @@ export function GalleryHub() {
         meta={`${totalWorksCount} works`}
       />
 
+      <section className="bg-bg border-b border-line" aria-label="Quick browse">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-12 md:py-16">
+          <span className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-accent-2 block mb-4">Quick browse</span>
+          <p className="max-w-[900px] font-display text-2xl sm:text-3xl md:text-4xl font-light leading-snug md:leading-relaxed text-text-dim text-pretty">
+            <HoverPreviewText parts={galleryLeadParts} previews={galleryLeadPreviews} />
+          </p>
+        </div>
+      </section>
+
       <section className="bg-bg border-b border-line" aria-label="Collections">
         <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-12 gap-4 md:gap-6 items-start">
           <div className="md:col-span-7 flex flex-col gap-4 md:gap-6">
@@ -46,6 +60,8 @@ export function GalleryHub() {
           </div>
         </div>
       </section>
+
+      <ImmersiveGallery />
 
       <CtaBand />
     </>

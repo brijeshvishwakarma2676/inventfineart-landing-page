@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router';
 import { ArrowIcon, CloseIcon } from './Icons';
@@ -12,6 +12,22 @@ export function Lightbox({ items, currentIndex, categoryLabel, quoteHref, onClos
   const closeRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+
+  // Progressive loading: show the (already cached) thumbnail instantly, swap to the full-size file once it has downloaded.
+  const [fullState, setFullState] = useState({ id: null, failed: false });
+  useEffect(() => {
+    if (!item) return undefined;
+    let alive = true;
+    const img = new Image();
+    img.onload = () => alive && setFullState({ id: item.id, failed: false });
+    img.onerror = () => alive && setFullState({ id: item.id, failed: true });
+    img.src = item.full;
+    return () => {
+      alive = false;
+    };
+  }, [item]);
+  const fullReady = Boolean(item) && fullState.id === item.id && !fullState.failed;
+  const fullFailed = Boolean(item) && fullState.id === item.id && fullState.failed;
 
   const go = (delta) => onNavigate((currentIndex + delta + total) % total);
 
@@ -103,12 +119,17 @@ export function Lightbox({ items, currentIndex, categoryLabel, quoteHref, onClos
         )}
         <img
           key={item.id}
-          src={item.full}
+          src={fullReady ? item.full : item.thumb}
           alt={item.alt}
           width={item.w}
           height={item.h}
-          className="max-w-full max-h-full w-auto h-auto object-contain rounded-[2px]"
+          className={`max-w-full max-h-full w-auto h-auto object-contain rounded-[2px] transition-[filter] duration-500 ${fullReady ? '' : 'blur-[2px]'}`}
         />
+        {!fullReady && (
+          <span role="status" className="pointer-events-none absolute top-1 left-1/2 -translate-x-1/2 skeleton border border-line px-3 py-1.5 font-body text-[11px] uppercase tracking-[0.14em] text-text">
+            {fullFailed ? 'Full size unavailable' : 'Loading full size…'}
+          </span>
+        )}
         {total > 1 && (
           <button type="button" className={`${iconBtn} absolute right-0 z-10`} onClick={() => go(1)} aria-label="Next artwork">
             <ArrowIcon className="w-5 h-5" />

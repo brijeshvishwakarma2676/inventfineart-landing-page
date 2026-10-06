@@ -47,7 +47,7 @@ flowchart TD
 ```
 
 ## 3. Global elements (every page)
-- **Header/nav:** logo → `/`, links to `/about`, `/services`, `/gallery`, `/clients`, pill CTA `/contact`; desktop quiet WhatsApp link. Active link by route (`NavLink`). On `/gallery/*` the Gallery link stays active. Mobile: full-screen menu.
+- **Header/nav:** like the original site — info bar (socials placeholder, location, phone numbers, WhatsApp) + logo and plain menu: Home · About · Gallery · Our Clients · Services · FAQ · Contact (pill). No dropdowns. Mobile: full-screen menu.
 - **Footer:** about blurb, quick links, contact block, ISO line, back-to-top.
 - **Floating WhatsApp:** mobile only; hidden while menu/lightbox is open.
 - **Route behaviour:** scroll to top on navigation, move focus to `<main>`, quiet fade between pages, unique `<title>`/description/canonical per route.

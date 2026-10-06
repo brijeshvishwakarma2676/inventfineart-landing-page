@@ -54,13 +54,17 @@ Grid: 12-col desktop, max width 1280px, 24px gutters; mobile 16px side gutter.
 
 ---
 
-## 0. Navigation (sticky, transparent → solid on scroll)
-
+## 0. Navigation (same structure as the original site; no dropdowns)
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│ [logo] INVENT FINE ART      Services  Gallery  About  Clients  [CONTACT]│
-└──────────────────────────────────────────────────────────────────────┘
- Mobile: [logo]                                                  [☰]
+ desktop ≥1024 (fixed; transparent over Home hero, solid elsewhere)
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ f  X  P │ Kandivali East, Mumbai, Maharashtra      ☎ +91 93232 10327 / +91 96196 60089   ◌ WhatsApp │  ← info bar 36px (collapses on scroll)
+├──────────────────────────────────────────────────────────────────────────────┤
+│ [logo] INVENT FINE ART            HOME  ABOUT  GALLERY  OUR CLIENTS  SERVICES  FAQ  (CONTACT) │  ← main row 72px
+│        STUDIO & INSTALLATIONS                                                │
+└──────────────────────────────────────────────────────────────────────────────┘
+ < lg: [logo]                                                                 [☰] → full-screen menu
+ After scroll: info bar collapses; main row stays.
 ```
 
 ## 1. Hero block (`/`)
@@ -225,6 +229,23 @@ Grid: 12-col desktop, max width 1280px, 24px gutters; mobile 16px side gutter.
 │ © 2026 Invent Fine Art · ISO 9001:2008 certified      BACK TO TOP ↑  │
 └──────────────────────────────────────────────────────────────────────┘
  < lg: channel row stacks; main grid becomes brand (full width) + 3 columns (md) / 2 columns (phone).
+```
+
+## 8b. Cookie notice (all pages, first visit and via footer "Cookie settings")
+```
+ desktop: bottom-right, 440px            phone: bottom sheet, full width
+┌────────────────────────────────────┐  ──── (bronze rule draws in)
+│ COOKIES & PRIVACY      Invent Fine Art│
+│ A quiet note on cookies              │
+│ We use no advertising or analytics   │
+│ cookies. The studio map … loads only │
+│ if you allow it.                     │
+│ [ACCEPT ALL] [ESSENTIAL ONLY] Customise
+│ ── Essential ........... Required ── │   (Customise view)
+│ ── Embedded map ........ [switch] ── │
+│ [SAVE CHOICES]                       │
+└────────────────────────────────────┘
+ Contact page map without consent: hairline panel + [LOAD MAP] + "Open in Google Maps →"
 ```
 
 ## 9. Floating elements

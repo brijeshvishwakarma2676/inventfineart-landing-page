@@ -83,8 +83,8 @@ Image processing spec:
 ## 4. Fonts
 | Font | Use | Source | License |
 |------|-----|--------|---------|
-| Fraunces | headings | Google Fonts | OFL |
-| Inter | body/UI | Google Fonts | OFL |
+| Fraunces (variable, normal + italic 400) | headings | self-hosted `public/fonts/` (Latin subset, from Google Fonts) | OFL |
+| Inter (variable 400–600) | body/UI | self-hosted `public/fonts/` (Latin subset) | OFL |
 (Legacy fonts Montserrat/Open Sans retired.)
 
 ## 5. Gaps & client requests

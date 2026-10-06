@@ -24,12 +24,13 @@ Purpose: stop design-rule violations (shadows, pills everywhere, lift hovers, wr
 2. Tokens: one `@theme` block in `src/styles/tokens.css`. Components use token utilities only.
 3. **No shadows** of any kind.
 4. **Pill radius** only on: primary/ghost CTA buttons, slider dots, the floating WhatsApp button.
-5. **No lift/translate hover**, no bounce/spin/pulse/ping, no gradient text, no parallax, no count-up.
+5. **No lift/translate hover**, no bounce/spin/pulse/ping, no gradient text, no parallax, no count-up. (Documented exceptions: the owner-supplied CtaBand marquee uses `framer-motion`, lazy-loaded; the owner-supplied 3D gallery uses `three`/`@react-three/fiber`, lazy-loaded and started on demand; the cookie banner's ornate styling; the owner-supplied session intro overlay.)
 6. Hero zoom ≤ `scale-[1.04]`; hover scale ≤ `scale-[1.02]`.
 7. **No off-palette colours** (no default Tailwind colours, no arbitrary hex in classes, no brand-green WhatsApp).
 8. No `console.*`, no TODO/lorem, no machine-specific absolute paths in committed files.
 9. Content integrity: no invented clients/stats/claims/comments such as "verified".
 10. `prefers-reduced-motion` respected for every animation.
+11. Privacy copy must be true: the cookie notice may not claim anything the site doesn't do, and third-party embeds (Google Maps) must not load before consent.
 
 ## 3. Pre-dev / per-phase audit (run from `frontend/`, all must print nothing)
 

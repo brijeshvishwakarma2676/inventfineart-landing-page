@@ -1,4 +1,4 @@
-import { totalWorksCount } from './gallery-meta';
+import { categoryCounts, totalWorksCount } from './gallery-meta';
 
 export const siteData = {
   brand: {
@@ -31,9 +31,9 @@ export const siteData = {
 
   nav: [
     { label: 'About', to: '/about' },
-    { label: 'Services', to: '/services' },
     { label: 'Gallery', to: '/gallery' },
-    { label: 'Clients', to: '/clients' },
+    { label: 'Our Clients', to: '/clients' },
+    { label: 'Services', to: '/services' },
     { label: 'FAQ', to: '/faq' },
   ],
 
@@ -77,6 +77,49 @@ export const siteData = {
     title: 'For your premises',
     quote:
       'Invent Fine Art is a community of artists, committed to bring outstanding art to the commercial world. As a team of leading sculptors, painters and designers, we work in all areas of interior and architectural design at indoor as well as outdoor sites.',
+    // The quote above, split so key phrases can open an image preview (hover on desktop, tap on touch devices).
+    // Joined, the parts must read exactly like `quote`.
+    quoteParts: [
+      'Invent Fine Art is a community of ',
+      { key: 'studio', text: 'artists' },
+      ', committed to bring outstanding art to the commercial world. As a team of leading ',
+      { key: 'sculptures', text: 'sculptors, painters and designers' },
+      ', we work in all areas of ',
+      { key: 'facades', text: 'interior and architectural design' },
+      ' at ',
+      { key: 'fountains', text: 'indoor as well as outdoor sites' },
+      '.',
+    ],
+    previews: {
+      studio: {
+        image: '/assets/about/about_us.webp',
+        title: 'The studio',
+        subtitle: 'ISO 9001:2008 certified',
+        to: '/about',
+        linkLabel: 'About the studio',
+      },
+      sculptures: {
+        image: '/assets/gallery/sculptures/sculptures-005-thumb.webp',
+        title: 'Sculptures',
+        subtitle: `${categoryCounts.sculptures} works`,
+        to: '/gallery/sculptures',
+        linkLabel: 'View sculptures',
+      },
+      facades: {
+        image: '/assets/gallery/grc/grc-003-thumb.webp',
+        title: 'Architectural facades',
+        subtitle: 'GRC, CNC metal panels, 3D modular tiles',
+        to: '/services',
+        linkLabel: 'See our services',
+      },
+      fountains: {
+        image: '/assets/gallery/fountains/fountains-003-thumb.webp',
+        title: 'Water fountains',
+        subtitle: `${categoryCounts.fountains} works`,
+        to: '/gallery/water-fountains',
+        linkLabel: 'View fountains',
+      },
+    },
     features: [
       {
         title: 'High Quality',
@@ -152,18 +195,53 @@ export const siteData = {
     ],
   },
 
+  // Session intro: what the studio makes (captions use real gallery counts), then the brand. Plays once per tab session.
+  preloader: {
+    steps: [
+      { word: 'Sculptures.', caption: `${categoryCounts.sculptures} works` },
+      { word: 'Murals.', caption: `${categoryCounts.murals} works` },
+      { word: 'Fountains.', caption: `${categoryCounts.fountains} works` },
+      { word: 'Facades.', caption: 'GRC, CNC metal, 3D tiles' },
+      { word: 'Invent Fine Art', caption: 'Since 2008 · ISO 9001:2008', hold: 560 },
+    ],
+    tagline: 'Reinventing spaces through Innovations in Art',
+    corners: ['Studio & Installations', 'Mumbai · India'],
+  },
+
   ctaBand: {
+    tagline: 'Collaborate with us',
     headline: 'We can turn your ideas and imagination into reality.',
     subline: 'Partner with our studio for bespoke art installations, facades, and sculptural landmarks.',
     buttonText: 'Work with us',
     buttonHref: '/contact',
-    bgImage: '/assets/hero/banner-3.webp',
+    // Real work from the archive, mixed across categories, for the animated marquee.
+    marquee: [
+      '/assets/intro/1.webp',
+      '/assets/gallery/sculptures/sculptures-002-thumb.webp',
+      '/assets/gallery/murals/murals-002-thumb.webp',
+      '/assets/intro/3.webp',
+      '/assets/gallery/fountains/fountains-001-thumb.webp',
+      '/assets/gallery/grc/grc-001-thumb.webp',
+      '/assets/intro/5.webp',
+      '/assets/gallery/planters/planters-001-thumb.webp',
+      '/assets/gallery/sculptures/sculptures-010-thumb.webp',
+      '/assets/intro/2.webp',
+      '/assets/gallery/other/other-001-thumb.webp',
+      '/assets/gallery/murals/murals-010-thumb.webp',
+    ],
   },
+
 
   footer: {
     about:
       'Invent Fine Art is a foremost company betrothed in manufacturing, trading, supplying and exporting a top class Quality Art Work of Indoor and outdoor decor Products.',
     copyright: '© 2026 Invent Fine Art · ISO 9001:2008 certified',
+    // Developer credit shown in the footer bottom bar.
+    credit: {
+      label: 'Crafted by',
+      name: 'Brijesh Vishwakarma',
+      url: 'https://brijesh-dev-portfolio.vercel.app/',
+    },
     // Real URLs go in `url`. While `url` is null the icon renders as a disabled placeholder, not a link.
     // Do not invent accounts (the legacy site listed Facebook, Twitter and Pinterest; Google+ is retired).
     socialLinks: [

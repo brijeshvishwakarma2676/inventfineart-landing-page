@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import siteData from '../data/site';
 import { useReveal } from '../hooks/useReveal';
+import SmartImage from './SmartImage';
 import { ArrowIcon } from './Icons';
 
 // Asymmetric editorial arrangement: sizes and offsets deliberately differ.
@@ -28,8 +29,8 @@ export function FeaturedWorks() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-6 items-start">
           {showcase.map((item, idx) => (
-            <figure key={item.src} className={`${LAYOUT[idx] || 'col-span-1 md:col-span-4'} overflow-hidden rounded-[2px] bg-bg-raised`}>
-              <img src={item.src} alt={item.alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+            <figure key={item.src} className={`${LAYOUT[idx] || 'col-span-1 md:col-span-4'} overflow-hidden rounded-[2px]`}>
+              <SmartImage src={item.src} alt={item.alt} />
             </figure>
           ))}
         </div>

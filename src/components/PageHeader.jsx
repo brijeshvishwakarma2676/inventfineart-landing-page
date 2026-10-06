@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 // Compact header for inner pages: breadcrumb, display title, one dim line, optional meta (e.g. count).
 export function PageHeader({ crumbs = [], title, intro, meta, children }) {
   return (
-    <header className="border-b border-line pt-[calc(72px+3rem)] md:pt-[calc(72px+5rem)] pb-10 md:pb-14">
+    <header className="border-b border-line pt-[calc(var(--header-h)+3rem)] md:pt-[calc(var(--header-h)+5rem)] pb-10 md:pb-14">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8">
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol className="flex flex-wrap items-center gap-2 font-body text-xs uppercase tracking-[0.12em] text-text-dim">

@@ -5,6 +5,7 @@
 |-------|--------|-------|
 | Framework | React 19 + Vite 8 | already scaffolded in `frontend/` |
 | Language | JavaScript (JSX) | matches scaffold |
+| 3D (Gallery hub only) | `three` + `@react-three/fiber`, lazy chunk, started on demand; no `drei` | Owner request 2026-10-06 |
 | Styling | **Tailwind CSS v4.3** via `@tailwindcss/vite` (no PostCSS config, no `tailwind.config.js`); design tokens defined once in `src/styles/tokens.css` using `@theme` | Decision D7. Utilities restricted by the design rules in `10-Design-Rules-and-Audit.md` |
 | Routing | **`react-router` (library mode)**, 13 routes + 404, lazy-loaded pages, one `GalleryCategory` page for the 6 category routes | Decision D8 |
 | Animation | CSS + IntersectionObserver; no heavy libs | |
@@ -43,7 +44,7 @@ frontend/
 ### 3b. `vercel.json` (planned contents)
 - `redirects` (permanent): `/index.html→/`, `/about-us.html→/about`, `/services.html→/services`, `/gallery.html→/gallery`, `/sculptures.html→/gallery/sculptures`, `/wall_murals.html→/gallery/wall-murals`, `/water_fountains.html→/gallery/water-fountains`, `/grc-products.html→/gallery/grc-products`, `/planter.html→/gallery/planters`, `/other.html→/gallery/other`, `/our_client.html→/clients`, `/contact-us.html→/contact`.
 - `rewrites`: `/(.*)` → `/index.html` (SPA fallback so deep links and refresh work; unknown routes render the React 404 page).
-- `headers`: long-lived immutable cache for `/assets/*` and hashed build files; `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`; basic CSP allowing Google Fonts and the Google Maps embed.
+- `headers`: long-lived immutable cache for `/assets/*`, `/fonts/*` and hashed build files; `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`; basic CSP allowing Google Fonts and the Google Maps embed.
 - Preview deployments (per branch/PR) are used for client review before the domain is switched. Vercel Analytics / Speed Insights are optional (decide with analytics choice below).
 
 ## 4. SEO
@@ -77,8 +78,12 @@ WCAG 2.1 AA; keyboard operable; reduced-motion respected. Browsers: Chrome/Edge/
 - Optional: Formspree/Web3Forms endpoint stored in `VITE_FORM_ENDPOINT` env var.
 - No secrets in repo; `.env` ignored (already in `.gitignore`).
 
+## 7b. Resilience on slow networks
+Boot loader before JS, `SmartImage` (reserved box + shimmer + LQIP blur-up + fade-in + retry-on-error), progressive lightbox (thumbnail → full), route progress bar + `PageSkeleton`, and slow-connection adaptations (`isSlowConnection()`: skip intro, smaller gallery batches, no 3D auto-start). Details in `09-BUILD-PROMPT.md` → LOADING STATES & SLOW CONNECTIONS.
+
 ## 8. Security & privacy
-- HTTPS only; security headers via host config (`X-Content-Type-Options`, `Referrer-Policy`, basic CSP allowing Google Fonts + Maps embed).
+- **Cookies/consent:** no analytics or ad cookies today. Google Maps is the only embed that may set cookies and is gated behind explicit consent (`useConsent`, `localStorage` key `ifa-consent-v1`). The footer "Cookie settings" link reopens the notice. If GA4/Plausible or other embeds are added (open question below), add a consent category and update the notice copy.
+- HTTPS only; security headers via host config (`X-Content-Type-Options`, `Referrer-Policy`, basic CSP allowing the Maps embed (fonts are self-hosted, so no font CDN is needed)).
 - Map iframe: `loading="lazy"`, `referrerpolicy="no-referrer-when-downgrade"`.
 - If analytics added: cookie notice only if cookies are used.
 

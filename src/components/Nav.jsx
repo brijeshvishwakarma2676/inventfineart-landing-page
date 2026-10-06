@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 import siteData from '../data/site';
-import { WhatsAppIcon, CloseIcon } from './Icons';
+import { CloseIcon, PhoneIcon, WhatsAppIcon } from './Icons';
+import SocialLinks from './SocialLinks';
 
 const linkClass = ({ isActive }) =>
-  `relative py-1 font-body text-xs uppercase tracking-[0.1em] font-medium transition-colors ${
-    isActive
-      ? 'text-text after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1.5px] after:bg-accent'
-      : 'text-text-dim hover:text-text'
+  `relative py-2 font-body text-xs uppercase tracking-[0.12em] font-medium transition-colors after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1.5px] after:bg-accent after:origin-left after:transition-transform after:duration-300 ${
+    isActive ? 'text-text after:scale-x-100' : 'text-text-dim hover:text-text after:scale-x-0 hover:after:scale-x-100'
   }`;
 
+// Same structure as the original site: a thin info bar (social + location, phone numbers), then logo + simple menu.
 export function Nav({ isMenuOpen, setIsMenuOpen }) {
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const isHome = pathname === '/';
   const solid = !isHome || scrolled;
+  const { contact, footer } = siteData;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -36,60 +37,76 @@ export function Nav({ isMenuOpen, setIsMenuOpen }) {
   }, [isMenuOpen, setIsMenuOpen]);
 
   const close = () => setIsMenuOpen(false);
+  const menu = [{ label: 'Home', to: '/' }, ...siteData.nav, { label: 'Contact', to: '/contact' }];
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 h-[72px] z-50 transition-colors duration-300 border-b ${
-          solid ? 'bg-bg/90 backdrop-blur-md border-line' : 'bg-transparent border-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b ${
+          solid ? 'bg-bg/95 backdrop-blur-md border-line' : 'bg-transparent border-transparent'
         }`}
       >
-        <div className="max-w-[1280px] mx-auto h-full px-4 md:px-8 flex items-center justify-between">
+        {/* Info bar (desktop): collapses once the page is scrolled */}
+        <div
+          className={`hidden lg:block overflow-hidden border-b border-line/60 transition-[height,opacity] duration-300 ${
+            scrolled ? 'h-0 opacity-0 border-transparent' : 'h-9 opacity-100'
+          }`}
+          aria-hidden={scrolled}
+        >
+          <div className="max-w-[1280px] mx-auto h-9 px-8 flex items-center justify-between font-body text-xs text-text-dim">
+            <div className="flex items-center gap-4">
+              <SocialLinks links={footer.socialLinks} size="sm" />
+              <span className="w-px h-4 bg-line" aria-hidden="true" />
+              <span>Kandivali East, Mumbai, Maharashtra</span>
+            </div>
+            <div className="flex items-center gap-5">
+              <span className="flex items-center gap-2 tabular-nums whitespace-nowrap">
+                <PhoneIcon className="w-3.5 h-3.5" />
+                <a href={`tel:${contact.phones[0].raw}`} className="hover:text-text transition-colors" tabIndex={scrolled ? -1 : 0}>{contact.phones[0].display}</a>
+                <span aria-hidden="true">/</span>
+                <a href={`tel:${contact.phones[1].raw}`} className="hover:text-text transition-colors" tabIndex={scrolled ? -1 : 0}>{contact.phones[1].display}</a>
+              </span>
+              <a href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-text transition-colors" tabIndex={scrolled ? -1 : 0}>
+                <WhatsAppIcon className="w-3.5 h-3.5" />
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Main row */}
+        <div className="max-w-[1280px] mx-auto h-[72px] px-4 md:px-8 flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3 z-50" onClick={close}>
-            <img
-              src={siteData.brand.logo}
-              alt="Invent Fine Art logo"
-              className="w-9 h-9 object-contain rounded-[2px]"
-              width="36"
-              height="36"
-            />
+            <img src={siteData.brand.logo} alt="Invent Fine Art logo" className="w-9 h-9 object-contain rounded-[2px]" width="36" height="36" />
             <span>
-              <span className="font-display text-lg md:text-xl font-medium tracking-wide text-text block">
+              <span className="font-display text-lg md:text-xl font-medium tracking-wide text-text block leading-tight whitespace-nowrap">
                 INVENT FINE ART
               </span>
-              <span className="font-body text-[10px] tracking-[0.14em] uppercase text-accent-2 block -mt-0.5">
+              <span className="font-body text-[10px] tracking-[0.14em] uppercase text-accent-2 block -mt-0.5 whitespace-nowrap">
                 Studio &amp; Installations
               </span>
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+          <nav className="hidden lg:block" aria-label="Main navigation">
             <ul className="flex items-center gap-7">
-              {siteData.nav.map((item) => (
+              {menu.map((item) => (
                 <li key={item.to}>
-                  <NavLink to={item.to} className={linkClass}>
-                    {item.label}
-                  </NavLink>
+                  {item.to === '/contact' ? (
+                    <Link
+                      to={item.to}
+                      className="inline-flex items-center justify-center px-5 rounded-full bg-accent hover:bg-accent-hover text-text text-xs uppercase font-semibold tracking-wider transition-colors min-h-[40px]"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <NavLink to={item.to} end={item.to === '/'} className={linkClass}>
+                      {item.label}
+                    </NavLink>
+                  )}
                 </li>
               ))}
             </ul>
-            <div className="flex items-center gap-5 pl-4 border-l border-line">
-              <a
-                href={siteData.contact.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-text-dim hover:text-text transition-colors"
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-                <span>WhatsApp</span>
-              </a>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-accent hover:bg-accent-hover text-text text-xs uppercase font-semibold tracking-wider transition-colors min-h-[40px]"
-              >
-                Contact
-              </Link>
-            </div>
           </nav>
 
           <button
@@ -115,7 +132,7 @@ export function Nav({ isMenuOpen, setIsMenuOpen }) {
           aria-label="Site navigation"
         >
           <ul className="flex flex-col divide-y divide-line border-y border-line">
-            {[{ label: 'Home', to: '/' }, ...siteData.nav, { label: 'Contact', to: '/contact' }].map((item) => (
+            {menu.map((item) => (
               <li key={item.to}>
                 <NavLink
                   to={item.to}
@@ -140,11 +157,11 @@ export function Nav({ isMenuOpen, setIsMenuOpen }) {
               Start a project
             </Link>
             <div className="flex flex-col gap-1 text-sm text-text-dim">
-              <a href={siteData.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="py-2 hover:text-text">
-                WhatsApp: {siteData.contact.phones[0].display}
+              <a href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="py-2 hover:text-text">
+                WhatsApp: {contact.phones[0].display}
               </a>
-              <a href={`tel:${siteData.contact.primaryPhone}`} className="py-2 hover:text-text">
-                Call: {siteData.contact.phones[0].display}
+              <a href={`tel:${contact.primaryPhone}`} className="py-2 hover:text-text">
+                Call: {contact.phones[0].display}
               </a>
             </div>
           </div>

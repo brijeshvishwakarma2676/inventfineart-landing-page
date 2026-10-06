@@ -8,6 +8,7 @@ import MasonryGrid from '../components/MasonryGrid';
 import Lightbox from '../components/Lightbox';
 import CtaBand from '../components/CtaBand';
 import usePageMeta from '../hooks/usePageMeta';
+import { isSlowConnection } from '../utils/network';
 import NotFound from './NotFound';
 import { ArrowIcon } from '../components/Icons';
 
@@ -17,7 +18,7 @@ function CategoryPage({ category }) {
   const navigate = useNavigate();
   const openedByPush = useRef(false);
   // Smaller batches on phones keep the first load light (2 columns show ~6 tiles per screen).
-  const [batch] = useState(() => (window.innerWidth < 640 ? 12 : 24));
+  const [batch] = useState(() => (window.innerWidth < 640 || isSlowConnection() ? 12 : 24));
   const [visible, setVisible] = useState(batch);
 
   const items = useMemo(() => galleryManifest.filter((i) => i.category === category.key), [category.key]);

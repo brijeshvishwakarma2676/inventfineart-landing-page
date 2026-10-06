@@ -4,11 +4,25 @@ import { galleryCategories } from '../data/categories';
 import { ArrowIcon, WhatsAppIcon } from './Icons';
 import NewsletterForm from './NewsletterForm';
 import SocialLinks from './SocialLinks';
+import { useSyncExternalStore } from 'react';
+import { consent } from '../hooks/useConsent';
+import { intro } from '../utils/intro';
 
+const utilityBtn =
+  'inline-flex items-center gap-1.5 min-h-[44px] font-body text-xs uppercase tracking-wider text-text-dim hover:text-text transition-colors cursor-pointer';
 const linkCls = 'font-body text-sm text-text-dim hover:text-text transition-colors inline-block py-1';
 const labelCls = 'font-body text-xs font-semibold uppercase tracking-[0.14em] text-accent-2 block mb-4';
 
+const REDUCED = '(prefers-reduced-motion: reduce)';
+const subscribeMotion = (cb) => {
+  const mq = window.matchMedia(REDUCED);
+  mq.addEventListener('change', cb);
+  return () => mq.removeEventListener('change', cb);
+};
+
 export function Footer() {
+  // The intro is motion-based, so the replay link is hidden for visitors who prefer reduced motion.
+  const reducedMotion = useSyncExternalStore(subscribeMotion, () => window.matchMedia(REDUCED).matches, () => false);
   const { contact, footer, brand } = siteData;
   const directionsUrl = `https://www.google.com/maps?q=${contact.factoryCoords.lat},${contact.factoryCoords.lng}`;
 
@@ -83,7 +97,7 @@ export function Footer() {
                 <li key={c.slug}>
                   <Link to={`/gallery/${c.slug}`} className="font-body text-sm text-text-dim hover:text-text transition-colors flex items-baseline justify-between gap-4 max-w-[220px] py-1">
                     <span>{c.label}</span>
-                    <span className="text-xs text-text-dim/70 tabular-nums">{c.count}</span>
+                    <span className="text-xs text-text-dim tabular-nums">{c.count}</span>
                   </Link>
                 </li>
               ))}
@@ -121,17 +135,44 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
+      {/* Bottom bar: copyright + credit on the left, utility links grouped on the right */}
       <div className="border-t border-line">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <p className="font-body text-xs text-text-dim">{footer.copyright}</p>
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="self-start sm:self-auto font-body text-xs uppercase tracking-wider text-text-dim hover:text-text transition-colors cursor-pointer min-h-[44px]"
-          >
-            Back to top &uarr;
-          </button>
+        <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5 md:gap-8">
+          <div className="flex flex-col gap-1">
+            <p className="font-body text-xs text-text-dim">{footer.copyright}</p>
+            <p className="font-body text-xs text-text-dim">
+              {footer.credit.label}{' '}
+              <a
+                href={footer.credit.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${footer.credit.label} ${footer.credit.name} (opens portfolio in a new tab)`}
+                className="inline-flex items-center gap-1 text-text underline decoration-accent-2 underline-offset-4 hover:text-accent-2 transition-colors py-1"
+              >
+                {footer.credit.name} <ArrowIcon className="w-3 h-3 -rotate-45" />
+              </a>
+            </p>
+          </div>
+
+          <ul className="flex flex-wrap items-center gap-x-5 gap-y-1 md:gap-x-0 md:divide-x md:divide-line">
+            <li className="md:px-5 md:first:pl-0">
+              <button type="button" onClick={() => consent.open()} className={utilityBtn}>
+                Cookie settings
+              </button>
+            </li>
+            {!reducedMotion && (
+              <li className="md:px-5">
+                <button type="button" onClick={() => intro.replay()} className={utilityBtn}>
+                  Replay intro
+                </button>
+              </li>
+            )}
+            <li className="md:pl-5">
+              <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={utilityBtn}>
+                Back to top <span aria-hidden="true">&uarr;</span>
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

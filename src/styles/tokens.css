@@ -25,5 +25,11 @@
 /* Non-token values only (no colour/font/radius/easing duplicates). */
 :root {
   --container-max: 1280px;
-  --nav-height: 72px;
+  --header-h: 72px; /* mobile header */
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 108px; /* top info bar (36px) + main row (72px) */
+  }
 }

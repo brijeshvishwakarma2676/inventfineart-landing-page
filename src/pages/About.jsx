@@ -3,6 +3,7 @@ import PageHeader from '../components/PageHeader';
 import CtaBand from '../components/CtaBand';
 import usePageMeta from '../hooks/usePageMeta';
 import { useReveal } from '../hooks/useReveal';
+import SmartImage from '../components/SmartImage';
 import { pageMeta } from '../data/seo';
 
 export function About() {
@@ -21,8 +22,8 @@ export function About() {
       <section className="bg-bg border-b border-line" aria-label="Studio profile">
         <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-20 md:py-28 grid lg:grid-cols-12 gap-12 lg:gap-16" ref={revealRef}>
           <figure className="lg:col-span-5 relative self-start">
-            <div className="aspect-[3/4] rounded-[2px] overflow-hidden bg-bg-raised">
-              <img src={image} alt="Invent Fine Art studio artisans and production facility" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <div className="aspect-[3/4] rounded-[2px] overflow-hidden">
+              <SmartImage src={image} alt="Invent Fine Art studio artisans and production facility" />
             </div>
             <figcaption className="mt-4 font-body text-xs font-semibold uppercase tracking-[0.14em] text-accent-2">{badge}</figcaption>
           </figure>
@@ -48,7 +49,7 @@ export function About() {
           <ol className="flex md:grid md:grid-cols-5 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-t border-line">
             {processSteps.map((step) => (
               <li key={step.num} className="min-w-[250px] md:min-w-0 snap-start py-6 pr-6 md:pr-8 md:border-r md:border-line md:pl-6 first:md:pl-0 last:md:border-r-0 flex flex-col gap-3">
-                <span className="font-display text-5xl text-line">{step.num}</span>
+                <span className="font-display text-5xl text-accent-2">{step.num}</span>
                 <h3 className="font-display text-xl text-text">{step.title}</h3>
                 <p className="font-body text-sm text-text-dim">{step.desc}</p>
               </li>
