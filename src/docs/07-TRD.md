@@ -81,6 +81,9 @@ WCAG 2.1 AA; keyboard operable; reduced-motion respected. Browsers: Chrome/Edge/
 ## 7b. Resilience on slow networks
 Boot loader before JS, `SmartImage` (reserved box + shimmer + LQIP blur-up + fade-in + retry-on-error), progressive lightbox (thumbnail → full), route progress bar + `PageSkeleton`, and slow-connection adaptations (`isSlowConnection()`: skip intro, smaller gallery batches, no 3D auto-start). Details in `09-BUILD-PROMPT.md` → LOADING STATES & SLOW CONNECTIONS.
 
+## 7c. Chatbot architecture (planned)
+Floating chat UI (`src/chatbot/`) → `POST /api/chat` (Vercel serverless function, `api/chat.js`) → Groq. `GROQ_API_KEY` exists only as a server environment variable (local: `environments/.env`, git-ignored; production: Vercel project settings). The assistant answers only from `chatbot/knowledge/*.md`, which is bundled into the function by `scripts/build-knowledge.mjs` (no vector DB; the knowledge base is ~3.3k tokens). Facts must trace to the original website HTML (`chatbot/SOURCES.md`). See `chatbot/README.md` for the security checklist and phases, and `12-CHATBOT-UI-PROMPT.md` for the UI.
+
 ## 8. Security & privacy
 - **Cookies/consent:** no analytics or ad cookies today. Google Maps is the only embed that may set cookies and is gated behind explicit consent (`useConsent`, `localStorage` key `ifa-consent-v1`). The footer "Cookie settings" link reopens the notice. If GA4/Plausible or other embeds are added (open question below), add a consent category and update the notice copy.
 - HTTPS only; security headers via host config (`X-Content-Type-Options`, `Referrer-Policy`, basic CSP allowing the Maps embed (fonts are self-hosted, so no font CDN is needed)).

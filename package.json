@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "assets": "node scripts/optimize-images.mjs && node scripts/build-manifest.mjs"
+    "assets": "node scripts/optimize-images.mjs && node scripts/build-manifest.mjs",
+    "knowledge": "node scripts/build-knowledge.mjs",
+    "prebuild": "node scripts/build-knowledge.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.1",

@@ -1,8 +1,10 @@
 import siteData from '../data/site';
 import { WhatsAppIcon } from './Icons';
+import { useMobileChatOpen } from '../chatbot/chatUiStore';
 
 export function FloatingWhatsApp({ isHidden = false }) {
-  if (isHidden) return null;
+  const isMobileChatOpen = useMobileChatOpen();
+  if (isHidden || isMobileChatOpen) return null;
 
   return (
     <aside aria-label="Quick WhatsApp contact" className="md:hidden">

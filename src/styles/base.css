@@ -194,6 +194,53 @@ main:focus {
   animation-play-state: paused;
 }
 
+
+/* Chatbot keyframes and motion classes */
+@keyframes chatLauncherFade {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes chatWindowDesktop {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes chatWindowMobile {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes chatMessageAppear {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes chatTypingDot {
+  0%, 80%, 100% { opacity: 0.25; transform: scale(0.85); }
+  40% { opacity: 1; transform: scale(1.1); }
+}
+
+.chat-launcher-enter {
+  animation: chatLauncherFade 400ms var(--ease-custom) both;
+}
+
+.chat-window-desktop {
+  animation: chatWindowDesktop 240ms var(--ease-custom) both;
+}
+
+.chat-window-mobile {
+  animation: chatWindowMobile 280ms var(--ease-custom) both;
+}
+
+.chat-message-enter {
+  animation: chatMessageAppear 200ms var(--ease-custom) both;
+}
+
+.chat-typing-dot {
+  animation: chatTypingDot 1.2s infinite ease-in-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;

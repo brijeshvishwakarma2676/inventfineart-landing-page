@@ -1,3 +1,4 @@
+import ChatWidget from '../chatbot';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigation } from 'react-router';
 import PageSkeleton from '../components/PageSkeleton';
@@ -59,6 +60,7 @@ export function RootLayout() {
       </main>
       <Footer />
       <FloatingWhatsApp isHidden={isMenuOpen || isConsentOpen} />
+      <ChatWidget />
       {introReady && <CookieBanner />}
     </div>
     </>

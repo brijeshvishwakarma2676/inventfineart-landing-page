@@ -18,6 +18,7 @@ Code: `frontend/` (Vite + React 19)
 | 08 | [Folder Structure](08-Folder-Structure.md) | Directory layout + conventions | Done |
 | 09 | [Master Build Prompt](09-BUILD-PROMPT.md) | Standalone prompt to build the whole site | Ready |
 | 10 | [Design Rules & Audit](10-Design-Rules-and-Audit.md) | Root causes, banned patterns, audit commands | Ready |
+| 12 | [Chatbot UI Master Prompt](12-CHATBOT-UI-PROMPT.md) | Prompt to build the floating chatbot UI (mock service; no backend) | Ready |
 | 11 | [Multi-page Migration Prompt](11-MULTIPAGE-MIGRATION-PROMPT.md) | Prompt to migrate the existing single-page build to 13 routes | Ready |
 
 ## Build Progress Tracker
@@ -54,6 +55,8 @@ Code: `frontend/` (Vite + React 19)
 | Date | Change |
 |------|--------|
 | 2026-10-05 | Initial documentation set created from archived site data. |
+| 2026-10-06 | **Chatbot foundation:** `chatbot/` (knowledge md files, prompts, eval questions, SOURCES.md, README), `api/chat.js` stub, `api/_lib/knowledge.generated.js` built by `scripts/build-knowledge.mjs` (also runs as `prebuild`), `.env.example`, empty `src/chatbot/` UI folders, `/api` excluded from the SPA rewrite, `environments/` + `.env.*` git-ignored. Key stays server-side (Vercel function), never in the browser. **Knowledge is built from the original `raw_html`, not from the archive summaries.** Added `12-CHATBOT-UI-PROMPT.md`. **Content-integrity finding:** several details in the new site copy are not in the original website (see `chatbot/SOURCES.md` → Known gaps); they need correcting/confirming. |
+| 2026-10-06 | **Hero slideshow freeze fixed.** Cause: it paused on hover/focus of the whole full-screen section (cursor resting on the hero = never advanced; on touch a tap's emulated hover paused it permanently; a focused dot kept it paused). Now: no hover/tap pause; restartable per-slide timer; Pause/Play button; pause only on keyboard focus-visible, hidden tab and while the intro plays; reduced motion = no autoplay; next image preloaded before advancing; 32px-tall dot hit areas. Verified on desktop, touch, slow 3G, reduced motion and with the intro. |
 | 2026-10-06 | **Slow-network handling:** `SmartImage` (shimmer + generated LQIP blur-up + fade-in + failed-image tile with Retry) for gallery/hub/featured/services/About; progressive lightbox (thumb → full, "Loading full size…"); route progress bar + `PageSkeleton`; branded boot loader + `<noscript>` contact text in `index.html`; `isSlowConnection()` skips the intro, halves gallery batches and blocks 3D auto-start. Tested on emulated slow 3G + 4x CPU: CLS 0.0005 over the whole load. `npm run assets` now also writes LQIPs (`data/gallery.js` +9 KB gz, `data/lqip.js`). |
 | 2026-10-06 | **Footer bottom bar tidied:** Cookie settings / Replay intro / Back to top grouped into one aligned row with hairline dividers (previously spread across the bar). |
 | 2026-10-06 | **Developer credit added** to the footer bottom bar: "Crafted by Brijesh Vishwakarma ↗" → https://brijesh-dev-portfolio.vercel.app/ (data in `siteData.footer.credit`; new tab, `noopener noreferrer`). |

@@ -1,26 +1,78 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, useSyncExternalStore } from 'react';
 import { Link } from 'react-router';
 import siteData from '../data/site';
 import { ArrowIcon } from './Icons';
 import { lqip } from '../data/lqip';
+import { useIntro } from '../hooks/useIntro';
+
+const SLIDE_MS = 6000;
+const REDUCED = '(prefers-reduced-motion: reduce)';
+const subscribeMotion = (cb) => {
+  const mq = window.matchMedia(REDUCED);
+  mq.addEventListener('change', cb);
+  return () => mq.removeEventListener('change', cb);
+};
 
 export function Hero() {
   const { slides, stats, eyebrow } = siteData.hero;
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [userPaused, setUserPaused] = useState(false); // explicit Pause button
+  const [focusPaused, setFocusPaused] = useState(false); // keyboard focus on the slide controls
+  const [tabVisible, setTabVisible] = useState(() => document.visibilityState === 'visible');
+  const reducedMotion = useSyncExternalStore(subscribeMotion, () => window.matchMedia(REDUCED).matches, () => false);
+  const { playing: introPlaying } = useIntro();
+  const preloaded = useRef({});
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  // Auto-advance slides every 6 seconds unless paused
+  // The slideshow runs unless the visitor paused it, a keyboard user is on its controls, the tab is hidden, the
+  // session intro is still covering the page, or the visitor prefers reduced motion. Hovering or tapping the hero
+  // never pauses it (the hero fills the screen, so that made it look stuck).
+  const autoplay = !userPaused && !focusPaused && tabVisible && !introPlaying && !reducedMotion;
+
   useEffect(() => {
-    if (isPaused) return;
+    const onVis = () => setTabVisible(document.visibilityState === 'visible');
+    document.addEventListener('visibilitychange', onVis);
+    return () => document.removeEventListener('visibilitychange', onVis);
+  }, []);
 
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+  // Resolves when a slide's image is cached (or after a timeout, so one slow image can never freeze the show).
+  const preload = useCallback(
+    (i) => {
+      if (!preloaded.current[i]) {
+        const slide = slides[i];
+        preloaded.current[i] = new Promise((resolve) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.srcset = `${slide.image960} 960w, ${slide.image} 1920w`;
+          img.sizes = '100vw';
+          img.src = slide.image;
+          window.setTimeout(resolve, 4000);
+        });
+      }
+      return preloaded.current[i];
+    },
+    [slides],
+  );
 
-    return () => clearInterval(timer);
-  }, [isPaused, slides.length]);
+  // One timer per slide: any change of slide (auto, dot, swipe) restarts the countdown. The next image is fetched
+  // shortly after the slide appears (not competing with the first paint) and awaited before advancing.
+  useEffect(() => {
+    if (!autoplay) return undefined;
+    let cancelled = false;
+    const next = (currentSlide + 1) % slides.length;
+    const warm = window.setTimeout(() => preload(next), 1500);
+    const advance = window.setTimeout(async () => {
+      await preload(next);
+      if (!cancelled) setCurrentSlide(next);
+    }, SLIDE_MS);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(warm);
+      window.clearTimeout(advance);
+    };
+  }, [autoplay, currentSlide, slides.length, preload]);
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
@@ -46,16 +98,12 @@ export function Hero() {
       id="home"
       className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden pt-[var(--header-h)] bg-bg select-none"
       aria-label="Hero Showcase"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
-      onBlur={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
       {/* Background Slides */}
-      <div className="absolute inset-0 z-0" aria-live="polite">
+      <div className="absolute inset-0 z-0" aria-live={autoplay ? 'off' : 'polite'}>
         {slides.map((slide, index) => {
           const isActive = index === currentSlide;
           const isFirst = index === 0;
@@ -73,8 +121,8 @@ export function Hero() {
                 srcSet={`${slide.image960} 960w, ${slide.image} 1920w`}
                 sizes="100vw"
                 alt={slide.alt}
-                className={`w-full h-full object-cover object-[center_35%] transition-transform duration-[6000ms] ease-linear ${
-                  isActive ? 'scale-[1.04]' : 'scale-100'
+                className={`w-full h-full object-cover object-[center_35%] transition-transform ease-linear ${
+                  isActive ? 'scale-[1.04] duration-[6000ms]' : 'scale-100 duration-0'
                 }`}
                 loading={isFirst ? 'eager' : 'lazy'}
                 fetchPriority={isFirst ? 'high' : 'auto'}
@@ -117,9 +165,13 @@ export function Hero() {
               </Link>
             </div>
 
-            {/* Slider Dots & Counter */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2" role="tablist" aria-label="Hero slide dots">
+            {/* Slider dots, counter and pause control */}
+            <div
+              className="flex items-center gap-4"
+              onFocus={(e) => e.target.matches(':focus-visible') && setFocusPaused(true)}
+              onBlur={() => setFocusPaused(false)}
+            >
+              <div className="flex items-center" role="tablist" aria-label="Hero slides">
                 {slides.map((slide, idx) => (
                   <button
                     key={slide.image}
@@ -127,18 +179,32 @@ export function Hero() {
                     role="tab"
                     aria-selected={idx === currentSlide}
                     aria-label={`Go to slide ${idx + 1}`}
-                    className={`h-[3px] transition-all duration-300 cursor-pointer ${
-                      idx === currentSlide
-                        ? 'w-10 bg-accent'
-                        : 'w-6 bg-text/25 hover:bg-text/50'
-                    }`}
+                    className="group py-4 px-1 cursor-pointer"
                     onClick={() => setCurrentSlide(idx)}
-                  />
+                  >
+                    <span
+                      className={`block h-[3px] transition-all duration-300 ${
+                        idx === currentSlide ? 'w-10 bg-accent' : 'w-6 bg-text/25 group-hover:bg-text/50'
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
               <span className="font-body text-xs font-medium text-text-dim tracking-wider">
                 0{currentSlide + 1} / 0{slides.length}
               </span>
+              {!reducedMotion && (
+                <button
+                  type="button"
+                  onClick={() => setUserPaused((p) => !p)}
+                  aria-label={userPaused ? 'Play slideshow' : 'Pause slideshow'}
+                  className="w-11 h-11 -ml-2 flex items-center justify-center text-text-dim hover:text-text transition-colors cursor-pointer"
+                >
+                  <span className="font-body text-[10px]" aria-hidden="true">
+                    {userPaused ? '▶' : '❚❚'}
+                  </span>
+                </button>
+              )}
             </div>
           </div>
         </div>

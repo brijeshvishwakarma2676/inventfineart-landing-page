@@ -11,9 +11,19 @@ frontend/
 │   └── assets/                # OPTIMISED images only (WebP), copied from `old data/media`
 │       ├── brand/ hero/ intro/ services/ about/ clients/
 │       └── gallery/{sculptures,murals,fountains,grc,planters,other}/
+├── api/                       # Vercel serverless functions (server only; never bundled into the site)
+│   ├── chat.js                # POST /api/chat (chatbot; Groq call is added in the backend phase)
+│   └── _lib/knowledge.generated.js   # GENERATED from chatbot/ by scripts/build-knowledge.mjs
+├── chatbot/                   # the chatbot's brain: facts, prompts, regression questions (not shipped to the browser)
+│   ├── README.md · SOURCES.md
+│   ├── knowledge/NN-*.md      # facts, one topic per file (front matter: id, title, tags, source)
+│   ├── prompts/{system,handoff}.md
+│   └── evals/questions.json
+├── environments/.env          # local secrets (git-ignored)  ·  .env.example lists the variable names
 ├── scripts/                   # portable one-off Node tools (no machine-specific paths)
 │   ├── optimize-images.mjs    # old data/media -> public/assets (WebP, thumb + full)
 │   ├── build-manifest.mjs     # scans assets -> src/data/gallery.js
+│   ├── build-knowledge.mjs    # chatbot/*.md -> api/_lib/knowledge.generated.js (runs before every build)
 │   └── generate-sitemap.mjs   # routes -> public/sitemap.xml (optional)
 └── src/
     ├── main.jsx               # bootstrap + <RouterProvider>/<BrowserRouter>
@@ -30,6 +40,7 @@ frontend/
     ├── data/                  # content as data: site.js, services.js, clients.js, categories.js, gallery.js (generated)
     ├── hooks/                 # usePageMeta, useReveal, useLightbox (useScrollSpy no longer needed)
     ├── styles/                # tokens.css (Tailwind v4 `@theme` — the ONLY token source), base.css
+    ├── chatbot/               # chat UI: components/ hooks/ services/ (mock + real adapters) data/ (UI copy)
     ├── utils/                 # whatsapp link builder, validators, slugs
     └── docs/                  # project documentation + tracker (this folder)
 ```
