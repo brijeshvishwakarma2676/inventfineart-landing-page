@@ -20,6 +20,13 @@
   --radius-pill: 999px;
 
   --ease-custom: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Motion timing (doc 14) */
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
+  --duration-reveal: 650ms;
+  --stagger-step: 60ms;
 }
 
 /* Non-token values only (no colour/font/radius/easing duplicates). */

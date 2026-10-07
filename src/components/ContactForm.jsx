@@ -120,7 +120,7 @@ export function ContactForm() {
           {/* Form Column (lg: order-1) */}
           <div className="lg:col-span-7 order-2 lg:order-1">
             {submitted ? (
-              <div className="flex flex-col gap-6 py-8">
+              <div className="fade-in flex flex-col gap-6 py-8">
                 <span className="w-12 h-12 rounded-[2px] border border-accent text-accent-light flex items-center justify-center text-2xl" aria-hidden="true">
                   &#10003;
                 </span>
@@ -211,7 +211,7 @@ export function ContactForm() {
                     className="w-full bg-transparent border-b border-line focus:border-accent text-text py-2 text-base outline-none transition-colors"
                   />
                   {errors.name && (
-                    <span className="font-body text-xs text-accent-light mt-0.5">{errors.name}</span>
+                    <span className="fade-in font-body text-xs text-accent-light mt-0.5">{errors.name}</span>
                   )}
                 </div>
 
@@ -232,7 +232,7 @@ export function ContactForm() {
                       className="w-full bg-transparent border-b border-line focus:border-accent text-text py-2 text-base outline-none transition-colors"
                     />
                     {errors.phone && (
-                      <span className="font-body text-xs text-accent-light mt-0.5">{errors.phone}</span>
+                      <span className="fade-in font-body text-xs text-accent-light mt-0.5">{errors.phone}</span>
                     )}
                   </div>
 
@@ -273,7 +273,7 @@ export function ContactForm() {
                     ))}
                   </select>
                   {errors.service && (
-                    <span className="font-body text-xs text-accent-light mt-0.5">{errors.service}</span>
+                    <span className="fade-in font-body text-xs text-accent-light mt-0.5">{errors.service}</span>
                   )}
                 </div>
 
@@ -292,7 +292,7 @@ export function ContactForm() {
                     className="w-full bg-transparent border-b border-line focus:border-accent text-text py-2 text-base outline-none transition-colors resize-y"
                   />
                   {errors.message && (
-                    <span className="font-body text-xs text-accent-light mt-0.5">{errors.message}</span>
+                    <span className="fade-in font-body text-xs text-accent-light mt-0.5">{errors.message}</span>
                   )}
                 </div>
 
@@ -306,7 +306,7 @@ export function ContactForm() {
                   <span aria-hidden="true">&rarr;</span>
                 </button>
                 {submitError && (
-                  <p role="alert" className="font-body text-sm text-accent-light">{submitError}</p>
+                  <p role="alert" className="fade-in font-body text-sm text-accent-light">{submitError}</p>
                 )}
               </form>
             )}

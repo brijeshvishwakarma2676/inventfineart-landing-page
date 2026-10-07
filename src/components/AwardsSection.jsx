@@ -3,7 +3,9 @@ import SmartImage from './SmartImage';
 import { SHOW_MOCK_AWARDS, awards, certifications } from '../data/awards';
 
 export function AwardsSection() {
-  const revealRef = useReveal();
+  const headRef = useReveal();
+  const certRef = useReveal({ stagger: true });
+  const awardsRef = useReveal({ stagger: true });
   const visibleAwards = SHOW_MOCK_AWARDS ? awards : [];
 
   return (
@@ -12,9 +14,9 @@ export function AwardsSection() {
       aria-label="Awards and recognition"
       className="scroll-mt-[120px] bg-bg border-b border-line py-20 md:py-28"
     >
-      <div className="max-w-[1280px] mx-auto px-4 md:px-8" ref={revealRef}>
+      <div className="max-w-[1280px] mx-auto px-4 md:px-8">
         {/* Section Header with Total Awards Proof Counter */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 md:mb-18 pb-8 border-b border-line">
+        <div ref={headRef} className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 md:mb-18 pb-8 border-b border-line">
           <div className="max-w-2xl">
             <span className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-accent-2 block mb-3">
               Recognition & Excellence
@@ -67,7 +69,7 @@ export function AwardsSection() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div ref={certRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {certifications.map((cert) => (
               <div
                 key={cert.id}
@@ -123,7 +125,7 @@ export function AwardsSection() {
           </div>
 
           {visibleAwards.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div ref={awardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {visibleAwards.map((award) => (
                 <article
                   key={award.id}

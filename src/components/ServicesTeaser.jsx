@@ -7,7 +7,7 @@ import { ArrowIcon } from './Icons';
 export function ServicesTeaser() {
   const [activeId, setActiveId] = useState(services[0]?.id || 'murals');
   const [mobileOpenId, setMobileOpenId] = useState(services[0]?.id || 'murals');
-  const revealRef = useReveal();
+  const revealRef = useReveal({ stagger: true });
 
   const activeService = services.find((s) => s.id === activeId) || services[0];
 

@@ -30,7 +30,7 @@ export function NewsletterForm({ newsletter }) {
         </button>
       </div>
       {!live && (
-        <p id={`${id}-note`} className="font-body text-xs text-text-dim">
+        <p id={`${id}-note`} className="fade-in font-body text-xs text-text-dim">
           Signup opens soon.
         </p>
       )}

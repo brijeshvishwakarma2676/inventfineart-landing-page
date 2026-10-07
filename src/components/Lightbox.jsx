@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router';
 import { ArrowIcon, CloseIcon } from './Icons';
+import { useExitClose } from '../hooks/usePresence';
 
 const FOCUSABLE = 'button, a[href], [tabindex]:not([tabindex="-1"])';
 
-export function Lightbox({ items, currentIndex, categoryLabel, quoteHref, onClose, onNavigate }) {
+export function Lightbox({ items, currentIndex, categoryLabel, quoteHref, onClose: onCloseNow, onNavigate }) {
+  const { closing, requestClose: onClose } = useExitClose(onCloseNow, 200);
   const item = items[currentIndex];
   const total = items.length;
   const modalRef = useRef(null);
@@ -88,7 +90,7 @@ export function Lightbox({ items, currentIndex, categoryLabel, quoteHref, onClos
   return createPortal(
     <div
       ref={modalRef}
-      className="fixed inset-0 z-[9999] bg-bg/95 backdrop-blur-xl flex flex-col justify-between p-4 md:p-6"
+      className={`fixed inset-0 z-[9999] bg-bg/95 backdrop-blur-xl flex flex-col justify-between p-4 md:p-6 ${closing ? 'overlay-exit' : 'overlay-enter'}`}
       role="dialog"
       aria-modal="true"
       aria-label={`${categoryLabel} artwork ${item.n}`}
@@ -123,7 +125,7 @@ export function Lightbox({ items, currentIndex, categoryLabel, quoteHref, onClos
           alt={item.alt}
           width={item.w}
           height={item.h}
-          className={`max-w-full max-h-full w-auto h-auto object-contain rounded-[2px] transition-[filter] duration-500 ${fullReady ? '' : 'blur-[2px]'}`}
+          className={`frame-enter max-w-full max-h-full w-auto h-auto object-contain rounded-[2px] transition-[filter] duration-500 ${fullReady ? '' : 'blur-[2px]'}`}
         />
         {!fullReady && (
           <span role="status" className="pointer-events-none absolute top-1 left-1/2 -translate-x-1/2 skeleton border border-line px-3 py-1.5 font-body text-[11px] uppercase tracking-[0.14em] text-text">

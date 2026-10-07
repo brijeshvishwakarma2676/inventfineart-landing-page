@@ -4,7 +4,7 @@ import HoverPreviewText from './HoverPreviewText';
 
 export function Intro() {
   const { eyebrow, title, quoteParts, previews, features } = siteData.intro;
-  const revealRef = useReveal();
+  const revealRef = useReveal({ stagger: true });
 
   return (
     <section className="relative bg-bg border-b border-line" aria-label="Introduction">

@@ -5,7 +5,7 @@ import { useReveal } from '../hooks/useReveal';
 import { ArrowIcon } from './Icons';
 
 export function FaqTeaser() {
-  const revealRef = useReveal();
+  const revealRef = useReveal({ stagger: true });
 
   return (
     <section className="bg-bg border-b border-line" aria-label="Frequently asked questions">

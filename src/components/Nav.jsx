@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router';
 import siteData from '../data/site';
 import { CloseIcon, PhoneIcon, WhatsAppIcon } from './Icons';
 import SocialLinks from './SocialLinks';
+import { usePresence } from '../hooks/usePresence';
 
 const linkClass = ({ isActive }) =>
   `relative py-2 font-body text-xs uppercase tracking-[0.12em] font-medium transition-colors after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1.5px] after:bg-accent after:origin-left after:transition-transform after:duration-300 ${
@@ -16,6 +17,7 @@ export function Nav({ isMenuOpen, setIsMenuOpen }) {
   const isHome = pathname === '/';
   const solid = !isHome || scrolled;
   const { contact, footer } = siteData;
+  const { mounted: menuMounted, closing: menuClosing } = usePresence(isMenuOpen, 200);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -124,16 +126,17 @@ export function Nav({ isMenuOpen, setIsMenuOpen }) {
       </header>
 
       {/* Rendered outside <header> so backdrop-filter on the header cannot trap this fixed layer */}
-      {isMenuOpen && (
+      {menuMounted && (
         <div
-          className="fixed inset-0 bg-bg z-[55] lg:hidden flex flex-col justify-between pt-24 pb-8 px-6 overflow-y-auto"
+          data-state={menuClosing ? 'closing' : 'open'}
+          className={`fixed inset-0 bg-bg z-[55] lg:hidden flex flex-col justify-between pt-24 pb-8 px-6 overflow-y-auto ${menuClosing ? 'menu-exit' : 'menu-enter'}`}
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
         >
           <ul className="flex flex-col divide-y divide-line border-y border-line">
-            {menu.map((item) => (
-              <li key={item.to}>
+            {menu.map((item, i) => (
+              <li key={item.to} className="menu-item-enter" style={{ animationDelay: `${i * 40}ms` }}>
                 <NavLink
                   to={item.to}
                   end={item.to === '/'}

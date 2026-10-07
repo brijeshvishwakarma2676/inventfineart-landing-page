@@ -149,7 +149,7 @@ export function ChatLauncher({
           </span>
         </button>
 
-        {/* Mobile: 56px round icon button placed above WhatsApp (<640px) */}
+        {/* Mobile: 56px round icon button (<640px) */}
         <button
           data-chat-launcher
           type="button"
@@ -160,7 +160,7 @@ export function ChatLauncher({
           aria-label={uiCopy.launcher.ariaLabel}
           aria-expanded={isOpen}
           aria-controls="chat-window-dialog"
-          className="sm:hidden fixed right-4 bottom-[88px] chat-launcher-enter w-14 h-14 rounded-full bg-bg-raised hover:bg-bg border border-line hover:border-accent-2 text-accent-2 flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-accent-2"
+          className="sm:hidden fixed right-4 bottom-5 chat-launcher-enter w-14 h-14 rounded-full bg-bg-raised hover:bg-bg border border-line hover:border-accent-2 text-accent-2 flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-accent-2"
         >
           <img
             src="/assets/bot/bot-animated.webp"

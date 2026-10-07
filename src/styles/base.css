@@ -117,24 +117,72 @@ main:focus {
 
 /* Quiet fade between routes */
 @keyframes pageFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
 
+/* `backwards` (not `both`): no transform may remain on the wrapper, or it would become the containing block of fixed descendants */
 .page-fade {
-  animation: pageFade 260ms var(--ease-custom) both;
+  animation: pageFade var(--duration-base) var(--ease-custom) backwards;
+}
+
+/* Page header entrance (title rises, intro follows) */
+@keyframes headerRise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.header-rise {
+  animation: headerRise var(--duration-slow) var(--ease-custom) backwards;
+}
+.header-rise-late {
+  animation: headerRise var(--duration-slow) var(--ease-custom) 80ms backwards;
 }
 
 /* Reveal-on-scroll (class added by useReveal) */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 600ms var(--ease-custom), transform 600ms var(--ease-custom);
+  transition: opacity var(--duration-reveal) var(--ease-custom), transform var(--duration-reveal) var(--ease-custom);
 }
 
 .reveal.is-revealed {
   opacity: 1;
   transform: none;
+}
+
+/* Staggered children: the container is not faded, its direct children cascade (delay = index x step, capped at 8).
+   Uses an animation (not a transition) so the children's own hover transitions are never delayed. */
+@keyframes staggerIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes staggerFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.reveal-stagger > * {
+  opacity: 0;
+}
+.reveal-stagger.is-revealed > * {
+  opacity: 1;
+  animation: staggerIn var(--duration-reveal) var(--ease-custom) calc(var(--stagger-i, 0) * var(--stagger-step)) backwards;
+}
+.reveal-stagger > :nth-child(1) { --stagger-i: 0; }
+.reveal-stagger > :nth-child(2) { --stagger-i: 1; }
+.reveal-stagger > :nth-child(3) { --stagger-i: 2; }
+.reveal-stagger > :nth-child(4) { --stagger-i: 3; }
+.reveal-stagger > :nth-child(5) { --stagger-i: 4; }
+.reveal-stagger > :nth-child(6) { --stagger-i: 5; }
+.reveal-stagger > :nth-child(7) { --stagger-i: 6; }
+.reveal-stagger > :nth-child(n+8) { --stagger-i: 7; }
+
+/* Slow / data-saving connections: plain quick fade, no travel, no delays */
+.reveal.reveal-lite {
+  transform: none !important;
+  transition-duration: 150ms !important;
+}
+.reveal-stagger.reveal-lite.is-revealed > * {
+  animation: staggerFade 150ms linear backwards !important;
 }
 
 /* Cookie notice: quiet rise + fade, hairline rule draws in like a gallery label */
@@ -248,6 +296,55 @@ main:focus {
 }
 
 
+/* Press feedback on primary (accent) buttons: colour only, no scale or lift */
+button[class*="bg-accent"]:active:not(:disabled),
+a[class*="bg-accent"]:active {
+  filter: brightness(0.92);
+}
+
+/* Overlays: enter / exit (lightbox, mobile menu). Opacity + transform only. */
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes overlayOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes frameIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes menuIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@keyframes menuOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-8px); } }
+@keyframes menuItemIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.fade-in { animation: overlayIn var(--duration-fast) var(--ease-custom) backwards; }
+.overlay-enter { animation: overlayIn 240ms var(--ease-custom) backwards; }
+.overlay-exit { animation: overlayOut 200ms var(--ease-custom) forwards; pointer-events: none; }
+.frame-enter { animation: frameIn var(--duration-base) var(--ease-custom) backwards; }
+.menu-enter { animation: menuIn var(--duration-base) var(--ease-custom) backwards; }
+.menu-exit { animation: menuOut 200ms var(--ease-custom) forwards; pointer-events: none; }
+.menu-item-enter { animation: menuItemIn var(--duration-base) var(--ease-custom) backwards; }
+
+/* FAQ: animated open/close where ::details-content is supported (Chromium); elsewhere it simply opens instantly.
+   User-triggered disclosure: one of the two allowed block-size animations (doc 14 section 4.2). */
+@supports selector(::details-content) {
+  .faq-item {
+    interpolate-size: allow-keywords;
+  }
+  .faq-item::details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      block-size var(--duration-base) var(--ease-custom),
+      opacity var(--duration-base) var(--ease-custom),
+      content-visibility var(--duration-base) allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+/* Marquees pause while off-screen (set by ClientMarquee) */
+[data-offscreen="true"] .animate-marquee-left,
+[data-offscreen="true"] .animate-marquee-right {
+  animation-play-state: paused;
+}
+
 /* Chatbot keyframes and motion classes */
 @keyframes chatLauncherFade {
   from { opacity: 0; transform: scale(0.96); }
@@ -262,6 +359,16 @@ main:focus {
 @keyframes chatWindowMobile {
   from { transform: translateY(100%); }
   to { transform: translateY(0); }
+}
+
+@keyframes chatWindowDesktopClose {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(12px); }
+}
+
+@keyframes chatWindowMobileClose {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
 }
 
 @keyframes chatMessageAppear {
@@ -286,6 +393,16 @@ main:focus {
   animation: chatWindowMobile 280ms var(--ease-custom) both;
 }
 
+.chat-window-desktop.chat-window-closing {
+  animation: chatWindowDesktopClose 200ms var(--ease-custom) forwards;
+  pointer-events: none;
+}
+
+.chat-window-mobile.chat-window-closing {
+  animation: chatWindowMobileClose 220ms var(--ease-custom) forwards;
+  pointer-events: none;
+}
+
 .chat-message-enter {
   animation: chatMessageAppear 200ms var(--ease-custom) both;
 }
@@ -305,9 +422,25 @@ main:focus {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .reveal {
+  .reveal,
+  .reveal-stagger > * {
     opacity: 1;
     transform: none;
+  }
+  .fade-in,
+  .overlay-enter,
+  .overlay-exit,
+  .frame-enter,
+  .menu-enter,
+  .menu-exit,
+  .menu-item-enter,
+  .faq-item::details-content {
+    transition-duration: 0.001ms !important;
+  }
+  .page-fade,
+  .header-rise,
+  .header-rise-late {
+    animation: none !important;
   }
   .skeleton {
     animation: none !important;

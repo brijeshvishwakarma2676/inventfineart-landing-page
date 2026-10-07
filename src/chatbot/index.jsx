@@ -71,7 +71,7 @@ export function ChatWidget() {
     let frame = 0;
     const checkNav = () => {
       frame = 0;
-      const navDialog = document.querySelector('[aria-label="Site navigation"]');
+      const navDialog = document.querySelector('[aria-label="Site navigation"]:not([data-state="closing"])');
       setIsMenuOpen(Boolean(navDialog));
     };
 
@@ -79,7 +79,7 @@ export function ChatWidget() {
     const observer = new MutationObserver(() => {
       if (!frame) frame = requestAnimationFrame(checkNav);
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-state'] });
 
     return () => {
       observer.disconnect();

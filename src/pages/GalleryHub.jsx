@@ -6,6 +6,7 @@ import ImmersiveGallery from '../components/ImmersiveGallery';
 import PageHeader from '../components/PageHeader';
 import CtaBand from '../components/CtaBand';
 import usePageMeta from '../hooks/usePageMeta';
+import { useReveal } from '../hooks/useReveal';
 import { pageMeta } from '../data/seo';
 
 function Cover({ slug, className, objectPos = 'object-center' }) {
@@ -25,6 +26,7 @@ function Cover({ slug, className, objectPos = 'object-center' }) {
 
 export function GalleryHub() {
   usePageMeta(pageMeta.gallery);
+  const collectionsRef = useReveal({ stagger: true });
 
   return (
     <>
@@ -45,7 +47,7 @@ export function GalleryHub() {
       </section>
 
       <section className="bg-bg border-b border-line" aria-label="Collections">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-12 gap-4 md:gap-6 items-start">
+        <div ref={collectionsRef} className="max-w-[1280px] mx-auto px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-12 gap-4 md:gap-6 items-start">
           <div className="md:col-span-7 flex flex-col gap-4 md:gap-6">
             <Cover slug="sculptures" className="aspect-[4/3]" />
             <div className="grid grid-cols-2 gap-4 md:gap-6 items-start">

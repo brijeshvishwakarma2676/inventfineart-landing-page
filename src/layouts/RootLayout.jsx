@@ -4,10 +4,8 @@ import { Outlet, useLocation, useNavigation } from 'react-router';
 import PageSkeleton from '../components/PageSkeleton';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
-import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import CookieBanner from '../components/CookieBanner';
 import IntroReveal from '../components/IntroReveal';
-import { useConsent } from '../hooks/useConsent';
 import { useIntro } from '../hooks/useIntro';
 import siteData from '../data/site';
 
@@ -15,10 +13,10 @@ export function RootLayout() {
   const { pathname } = useLocation();
   const navigation = useNavigation();
   const isNavigating = navigation.state !== 'idle'; // a page's code is downloading
-  const { open: isConsentOpen } = useConsent();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { playing: introActive, ready: introReady } = useIntro();
   const mainRef = useRef(null);
+  const [initial] = useState(() => ({ path: pathname, underIntro: introActive }));
   const firstRender = useRef(true);
 
   // New route: reset scroll, close the mobile menu, move focus to <main> for keyboard/screen-reader users.
@@ -52,14 +50,13 @@ export function RootLayout() {
       )}
       <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <main id="main-content" tabIndex={-1} ref={mainRef}>
-        <div key={pathname} className="page-fade">
+        <div key={pathname} className={initial.underIntro && pathname === initial.path ? '' : 'page-fade'}>
           <Suspense fallback={<PageSkeleton />}>
             <Outlet />
           </Suspense>
         </div>
       </main>
       <Footer />
-      <FloatingWhatsApp isHidden={isMenuOpen || isConsentOpen} />
       <ChatWidget />
       {introReady && <CookieBanner />}
     </div>

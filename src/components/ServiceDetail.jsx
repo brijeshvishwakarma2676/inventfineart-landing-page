@@ -1,3 +1,4 @@
+import { useReveal } from '../hooks/useReveal';
 import { Link } from 'react-router';
 import { ArrowIcon } from './Icons';
 import SmartImage from './SmartImage';
@@ -18,8 +19,9 @@ function TextList({ title, items }) {
 }
 
 export function ServiceDetail({ service, imageClass = 'aspect-[16/10]' }) {
+  const revealRef = useReveal({ stagger: true });
   return (
-    <div className="flex flex-col gap-8">
+    <div ref={revealRef} className="flex flex-col gap-8">
       <div className={`w-full ${imageClass} rounded-[2px] overflow-hidden`}>
         <SmartImage src={service.image} alt={service.title} />
       </div>

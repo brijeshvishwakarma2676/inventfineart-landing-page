@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import uiCopy from '../data/uiCopy';
 import { useChat } from '../hooks/useChat';
 import { useFocusTrap } from '../hooks/useFocusTrap';
+import { useExitClose } from '../../hooks/usePresence';
 import MessageList from './MessageList';
 import Composer from './Composer';
 import { CloseIcon, RefreshIcon } from '../../components/Icons';
@@ -11,7 +12,8 @@ import { CloseIcon, RefreshIcon } from '../../components/Icons';
  * - Desktop: fixed floating panel (400px x min(640px, 100dvh-48px)), non-modal
  * - Mobile: full-screen modal sheet (100dvh), focus-trapped and body-scroll locked
  */
-export function ChatWindow({ onClose }) {
+export function ChatWindow({ onClose: onCloseNow }) {
+  const { closing, requestClose: onClose } = useExitClose(onCloseNow, 220);
   const containerRef = useRef(null);
   const inputRef = useRef(null);
   const [clearedNotice, setClearedNotice] = useState(false);
@@ -94,8 +96,8 @@ export function ChatWindow({ onClose }) {
       id="chat-window-dialog"
       className={`fixed z-[65] bg-bg border border-line flex flex-col overflow-hidden ${
         isMobile
-          ? 'inset-0 h-[100dvh] w-full chat-window-mobile'
-          : 'right-6 bottom-6 w-[400px] h-[min(640px,calc(100dvh-48px))] rounded-[2px] chat-window-desktop overscroll-contain'
+          ? `inset-0 h-[100dvh] w-full chat-window-mobile${closing ? ' chat-window-closing' : ''}`
+          : `right-6 bottom-6 w-[400px] h-[min(640px,calc(100dvh-48px))] rounded-[2px] chat-window-desktop overscroll-contain${closing ? ' chat-window-closing' : ''}`
       }`}
     >
       {/* Screen-reader announcement for chat cleared */}

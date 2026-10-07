@@ -18,8 +18,8 @@ export function PageHeader({ crumbs = [], title, intro, meta, children }) {
         </nav>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div className="max-w-[760px]">
-            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl leading-[1.04] text-text">{title}</h1>
-            {intro && <p className="font-body text-base md:text-lg text-text-dim mt-5 max-w-[620px]">{intro}</p>}
+            <h1 className="header-rise font-display text-4xl sm:text-5xl md:text-7xl leading-[1.04] text-text">{title}</h1>
+            {intro && <p className="header-rise-late font-body text-base md:text-lg text-text-dim mt-5 max-w-[620px]">{intro}</p>}
           </div>
           {meta && <p className="font-display text-2xl md:text-3xl text-accent-2 whitespace-nowrap">{meta}</p>}
         </div>

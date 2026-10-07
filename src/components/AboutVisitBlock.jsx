@@ -4,7 +4,7 @@ import { useReveal } from '../hooks/useReveal';
 
 export function AboutVisitBlock() {
   const { contact } = siteData;
-  const revealRef = useReveal();
+  const revealRef = useReveal({ stagger: true });
 
   return (
     <section
@@ -12,8 +12,8 @@ export function AboutVisitBlock() {
       aria-label="Studio location and contact details"
       className="scroll-mt-[120px] bg-bg border-b border-line py-20 md:py-28"
     >
-      <div className="max-w-[1280px] mx-auto px-4 md:px-8" ref={revealRef}>
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-8">
+        <div ref={revealRef} className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Heading and Address */}
           <div className="lg:col-span-6 flex flex-col gap-6">
             <div>

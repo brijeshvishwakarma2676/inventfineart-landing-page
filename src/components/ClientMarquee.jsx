@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import { clientRow1, clientRow2 } from '../data/clients';
 import { ArrowIcon } from './Icons';
@@ -22,8 +23,21 @@ function Row({ logos, direction }) {
 
 // Two-row marquee (opposite directions) for Home; the full grid lives on /clients.
 export function ClientMarquee() {
+  const sectionRef = useRef(null);
+
+  // Pause the loop while the marquee is off-screen (saves paint work on long pages)
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      el.dataset.offscreen = entry.isIntersecting ? 'false' : 'true';
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="bg-bg border-b border-line overflow-hidden py-16 md:py-20" aria-label="Clients">
+    <section ref={sectionRef} className="bg-bg border-b border-line overflow-hidden py-16 md:py-20" aria-label="Clients">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8 flex items-end justify-between flex-wrap gap-4 mb-8">
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-text">Trusted by</h2>
         <Link to="/clients" className="inline-flex items-center gap-2 font-body text-sm text-text-dim hover:text-text transition-colors">

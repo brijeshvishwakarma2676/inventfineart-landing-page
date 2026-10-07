@@ -16,18 +16,19 @@ const LAYOUT = [
 
 export function FeaturedWorks() {
   const { showcase } = siteData.intro;
-  const revealRef = useReveal();
+  const headRef = useReveal();
+  const gridRef = useReveal({ stagger: true });
 
   return (
     <section className="bg-bg border-b border-line" aria-label="Featured works">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-20 md:py-28" ref={revealRef}>
-        <div className="flex items-end justify-between flex-wrap gap-4 mb-10 md:mb-14">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-20 md:py-28">
+        <div ref={headRef} className="flex items-end justify-between flex-wrap gap-4 mb-10 md:mb-14">
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-text">Selected works</h2>
           <Link to="/gallery" className="inline-flex items-center gap-2 font-body text-sm text-text-dim hover:text-text transition-colors">
             Explore the full gallery <ArrowIcon />
           </Link>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-6 items-start">
+        <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-6 items-start">
           {showcase.map((item, idx) => (
             <figure key={item.src} className={`${LAYOUT[idx] || 'col-span-1 md:col-span-4'} overflow-hidden rounded-[2px]`}>
               <SmartImage src={item.src} alt={item.alt} />

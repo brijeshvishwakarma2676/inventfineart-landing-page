@@ -98,6 +98,7 @@ export function Clients() {
   usePageMeta(pageMeta.clients);
   const [viewMode, setViewMode] = useState('marquee');
   const revealRef = useReveal();
+  const metricsRef = useReveal({ stagger: true });
 
   return (
     <>
@@ -111,7 +112,7 @@ export function Clients() {
       {/* Credibility & Scale Metrics Strip */}
       <section className="bg-bg border-b border-line" aria-label="Key milestones">
         <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-10 md:py-14">
-          <div className="grid grid-cols-2 md:grid-cols-4 border-y border-line divide-y md:divide-y-0 md:divide-x divide-line">
+          <div ref={metricsRef} className="grid grid-cols-2 md:grid-cols-4 border-y border-line divide-y md:divide-y-0 md:divide-x divide-line">
             {METRICS.map((m) => (
               <div key={m.value} className="py-6 md:py-8 px-4 sm:px-6 flex flex-col gap-1.5">
                 <span className="font-display text-2xl sm:text-3xl lg:text-4xl text-text font-normal">

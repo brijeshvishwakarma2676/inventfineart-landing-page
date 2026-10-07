@@ -27,7 +27,11 @@ export function About() {
     disciplines,
   } = siteData.about;
 
-  const revealRef = useReveal();
+  const storyRef = useReveal({ stagger: true });
+  const craftHeadRef = useReveal();
+  const craftGridRef = useReveal({ stagger: true });
+  const processRef = useReveal({ stagger: true });
+  const facilityGridRef = useReveal({ stagger: true });
 
   return (
     <>
@@ -49,7 +53,7 @@ export function About() {
       >
         <div
           className="max-w-[1280px] mx-auto px-4 md:px-8 py-20 md:py-28 grid lg:grid-cols-12 gap-12 lg:gap-16"
-          ref={revealRef}
+          ref={storyRef}
         >
           <figure className="lg:col-span-5 relative self-start">
             <div className="aspect-[3/4] rounded-[2px] overflow-hidden">
@@ -106,7 +110,7 @@ export function About() {
         className="scroll-mt-[120px] bg-bg border-b border-line py-16 md:py-24"
       >
         <div className="max-w-[1280px] mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10" ref={craftHeadRef}>
             <div>
               <span className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-accent-2 block mb-2">
                 Portfolio Focus
@@ -124,7 +128,7 @@ export function About() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" ref={craftGridRef}>
             {craftStrip.map((item) => (
               <Link
                 key={item.id}
@@ -162,7 +166,7 @@ export function About() {
           <h2 className="font-display text-3xl md:text-5xl text-text mb-12">
             From conception to complete execution
           </h2>
-          <ol className="flex md:grid md:grid-cols-5 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-t border-line">
+          <ol ref={processRef} className="flex md:grid md:grid-cols-5 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-t border-line">
             {processSteps.map((step) => (
               <li
                 key={step.num}
@@ -197,7 +201,7 @@ export function About() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-y border-line divide-y md:divide-y-0 md:divide-x divide-line">
+          <div ref={facilityGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-y border-line divide-y md:divide-y-0 md:divide-x divide-line">
             {facilityUnits.map((unit) => (
               <div
                 key={unit.id}
