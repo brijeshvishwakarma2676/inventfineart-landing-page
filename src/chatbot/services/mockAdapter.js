@@ -209,10 +209,7 @@ function getScriptedReply(userText) {
   if (query.includes('found') || query.includes('year') || query.includes('establish') || query.includes('since')) {
     return {
       text:
-        'The website gives two statements regarding its founding:\n\n' +
-        '- The home page mentions: **Innovation and performance since 2008**.\n' +
-        '- The About page states: **Established in the year 2009**.\n\n' +
-        'Please feel free to confirm the exact timeline directly with the studio.',
+        'Invent Fine Art was **established in the year 2009**, delivering turnkey fine art craftsmanship and installations across India since then.',
       handoff: false,
     };
   }

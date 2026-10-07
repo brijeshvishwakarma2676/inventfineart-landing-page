@@ -28,7 +28,11 @@ export const lqip = {
   "/assets/gallery/covers/planters_cover.webp": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAABwBACdASoQABYAPxFysFAsJqSisAgBgCIJYgC073gATkUtpeeGQdBiBcZGAADLQuQlYhLoCQsx5dW3n7oiWcoAFzpc9PVUacBVXdJ1cd/k1C96nZ7NaJkhF9NOZDQdq3sY87SFZcP7wGGpMDzULhj0I57yRas1xlMr6tjlnKmv39L3hRSlMYNL4Fp6Mc98AAA=",
   "/assets/gallery/covers/sculptures_cover.webp": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAAAwBACdASoQABYAPxFysFAsJqSisAgBgCIJQBdgA3absfeekKtnOcOeuAAA/u1TMG+dNpu1WRLKq1gMSClsFBha62XPGIqqZAdNtakFzW3JqB3ZU1UTaPq9Q2SIjoZO6zstev6y0IMw1ET9gAA=",
   "/assets/gallery/covers/wall_murals_cover.webp": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwBACdASoQABYAPxFysFAsJqSisAgBgCIJbAC7LwABpll3MpFOy/7EgBAA/txoP/ViUZ3ykfEvspXzZ5j+x+4BLHzhEbWhp81Pb/mQPgGFsX9e+gxpelm7yTf1/9hamNPgAA==",
-  "/assets/gallery/covers/water_fountains_cover.webp": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAwBACdASoQABYAPxFwsFAsJiSisAgBgCIJbACdIIjC+PlPBsEOrgp+0gAA/uwjTwtfXMpHFuYkOwvrql3BUGY+N3IdV2nrTA/MOpbPoZdOc/tdfmor3Ev2/BlnbCr3Tb6BtzVd8eBqcYkeXZGdJ184AAA="
+  "/assets/gallery/covers/water_fountains_cover.webp": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAwBACdASoQABYAPxFwsFAsJiSisAgBgCIJbACdIIjC+PlPBsEOrgp+0gAA/uwjTwtfXMpHFuYkOwvrql3BUGY+N3IdV2nrTA/MOpbPoZdOc/tdfmor3Ev2/BlnbCr3Tb6BtzVd8eBqcYkeXZGdJ184AAA=",
+  "/assets/awards/award-1.webp": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoQAAwABUB8JZwAAtuKL63QAP7ukTQACCSMj06qE5wohtYV6Nh9oAAA",
+  "/assets/awards/award-2.webp": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAwABUB8JQBOgB2dnNWQAAD+6jCGJvqSNQNl4WxZrWbhZl2OCkKK8LQ6obSCphtOxK1iQAA=",
+  "/assets/awards/award-3.webp": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoQAAwABUB8JZwAAp06Hge0AAD+8rS6KbsIAFdce2aGUTf/uZcQAA==",
+  "/assets/awards/award-4.webp": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAwABUB8JZwAAlw2O710klQA/vK0jONb/Jx2+hkvo19ZdkDMv6CY9iCI1jxSboEAAA=="
 };
 
 export default lqip;

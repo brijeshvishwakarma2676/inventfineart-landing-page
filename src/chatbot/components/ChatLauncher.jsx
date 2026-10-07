@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { isSlowConnection } from '../../utils/network';
 import uiCopy from '../data/uiCopy';
-import { ChatIcon, CloseIcon } from '../../components/Icons';
+import { CloseIcon } from '../../components/Icons';
 
 const NUDGE_KEY = 'ifa-chat-nudge-seen';
 
@@ -136,7 +136,14 @@ export function ChatLauncher({
           aria-controls="chat-window-dialog"
           className="hidden sm:inline-flex fixed right-6 bottom-6 chat-launcher-enter items-center gap-2.5 px-5 min-h-[48px] rounded-full bg-bg-raised hover:bg-bg border border-line hover:border-accent-2 text-text transition-colors cursor-pointer group focus-visible:outline-accent-2"
         >
-          <ChatIcon className="w-5 h-5 text-accent-2 transition-colors" />
+          <img
+            src="/assets/bot/bot-animated.webp"
+            alt=""
+            aria-hidden="true"
+            width="28"
+            height="28"
+            className="w-7 h-7 object-contain shrink-0 transition-opacity"
+          />
           <span className="font-display text-sm tracking-wide font-medium">
             {uiCopy.launcher.desktopLabel}
           </span>
@@ -155,7 +162,14 @@ export function ChatLauncher({
           aria-controls="chat-window-dialog"
           className="sm:hidden fixed right-4 bottom-[88px] chat-launcher-enter w-14 h-14 rounded-full bg-bg-raised hover:bg-bg border border-line hover:border-accent-2 text-accent-2 flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-accent-2"
         >
-          <ChatIcon className="w-6 h-6" />
+          <img
+            src="/assets/bot/bot-animated.webp"
+            alt=""
+            aria-hidden="true"
+            width="36"
+            height="36"
+            className="w-9 h-9 object-contain"
+          />
         </button>
       </div>
     </aside>

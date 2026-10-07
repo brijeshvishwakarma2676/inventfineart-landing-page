@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import siteData from '../../data/site';
 import uiCopy from '../data/uiCopy';
 import { useChat } from '../hooks/useChat';
 import { useFocusTrap } from '../hooks/useFocusTrap';
@@ -58,6 +57,25 @@ export function ChatWindow({ onClose }) {
     inputRef.current?.focus();
   }, [reset]);
 
+  // Prevent background scroll when wheeling over non-scrollable chat chrome on desktop
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || isMobile) return;
+
+    const handleWheel = (e) => {
+      const target = e.target;
+      const scrollable = target.closest('[role="log"]') || target.closest('.overflow-y-auto');
+      if (!scrollable) {
+        e.preventDefault();
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, [isMobile]);
+
   // Handle internal link navigation
   const handleInternalLinkClick = useCallback(() => {
     if (isMobile) {
@@ -77,7 +95,7 @@ export function ChatWindow({ onClose }) {
       className={`fixed z-[65] bg-bg border border-line flex flex-col overflow-hidden ${
         isMobile
           ? 'inset-0 h-[100dvh] w-full chat-window-mobile'
-          : 'right-6 bottom-6 w-[400px] h-[min(640px,calc(100dvh-48px))] rounded-[2px] chat-window-desktop'
+          : 'right-6 bottom-6 w-[400px] h-[min(640px,calc(100dvh-48px))] rounded-[2px] chat-window-desktop overscroll-contain'
       }`}
     >
       {/* Screen-reader announcement for chat cleared */}
@@ -88,13 +106,20 @@ export function ChatWindow({ onClose }) {
       {/* Header (~64px) */}
       <header className="h-16 shrink-0 border-b border-line px-4 flex items-center justify-between bg-bg select-none">
         <div className="flex items-center gap-3 min-w-0">
-          <img
-            src={siteData.brand.logo}
-            alt="Invent Fine Art mark"
-            width="32"
-            height="32"
-            className="w-8 h-8 object-contain rounded-[2px] shrink-0"
-          />
+          <div className="relative w-9 h-9 shrink-0 flex items-center justify-center">
+            <img
+              src="/assets/bot/bot-animated.webp"
+              alt="Invent Fine Art studio assistant"
+              width="36"
+              height="36"
+              className="w-9 h-9 object-contain shrink-0"
+            />
+            <span
+              className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-accent-2 border-2 border-bg"
+              title="Online"
+              aria-label="Online status"
+            />
+          </div>
           <div className="min-w-0">
             <h2
               id="chat-window-title"

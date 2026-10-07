@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "assets": "node scripts/optimize-images.mjs && node scripts/build-manifest.mjs",
     "knowledge": "node scripts/build-knowledge.mjs",
-    "prebuild": "node scripts/build-knowledge.mjs"
+    "prebuild": "node scripts/build-knowledge.mjs && node scripts/check-mock-data.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.1",

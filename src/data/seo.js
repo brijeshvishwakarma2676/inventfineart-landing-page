@@ -10,13 +10,13 @@ export const pageMeta = {
     path: '/',
     title: 'Invent Fine Art | Sculptures, Wall Murals, GRC Facades & Water Fountains – Mumbai',
     description:
-      'ISO 9001:2008 certified maker & installer of sculptures, murals, GRC facades, fountains & architectural art in Mumbai since 2008.',
+      'ISO 9001:2008 certified maker & installer of sculptures, murals, GRC facades, fountains & architectural art in Mumbai since 2009.',
   },
   about: {
     path: '/about',
     title: 'About | Invent Fine Art',
     description:
-      'ISO 9001:2008 certified studio of artisans and product designers delivering art installations from concept to complete execution.',
+      'ISO 9001:2008 certified art studio in Kandivali East, Mumbai. Master craftsmen executing sculptures, murals, facades & fountains since 2009.',
   },
   services: {
     path: '/services',
@@ -81,7 +81,42 @@ export const localBusinessSchema = {
   },
   description:
     'ISO 9001:2008 certified maker and installer of sculptures, wall murals, water fountains, GRC facades, planters, gate grills, and artificial rockery.',
-  foundingDate: '2008',
+  foundingDate: '2009',
+};
+
+export const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About | Invent Fine Art',
+  url: `${SITE_URL}/about`,
+  description:
+    'ISO 9001:2008 certified art studio in Kandivali East, Mumbai. Master craftsmen executing sculptures, murals, facades & fountains since 2009.',
+  mainEntity: {
+    '@type': 'Organization',
+    name: siteData.brand.name,
+    url: `${SITE_URL}/`,
+    logo: `${SITE_URL}${siteData.brand.logo}`,
+    foundingDate: '2009',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'No. 14, Jay Bharat Zip Sangh, Vadar Pada, Kandivali East',
+      addressLocality: 'Mumbai',
+      postalCode: '400101',
+      addressRegion: 'Maharashtra',
+      addressCountry: 'IN',
+    },
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certification',
+        name: 'ISO 9001:2008 Quality Management System',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'ISO',
+        },
+      },
+    ],
+  },
 };
 
 export const faqSchema = (faqs) => ({

@@ -62,7 +62,7 @@ export function Footer() {
         <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-14 md:py-20 grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12">
           <div className="col-span-2 md:col-span-12 lg:col-span-4 flex flex-col gap-5">
             <Link to="/" className="flex items-center gap-3 self-start">
-              <img src={brand.logo} alt="Invent Fine Art logo" className="w-10 h-10 object-contain rounded-[2px]" width="40" height="40" />
+              <img src={brand.logo} alt="Invent Fine Art logo" className="w-12 h-12 object-contain rounded-[2px]" width="40" height="40" />
               <span>
                 <span className="font-display text-xl font-medium tracking-wide block">INVENT FINE ART</span>
                 <span className="font-body text-[10px] tracking-[0.14em] uppercase text-accent-2 block -mt-0.5">{brand.certification}</span>

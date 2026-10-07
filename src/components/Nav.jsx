@@ -77,7 +77,7 @@ export function Nav({ isMenuOpen, setIsMenuOpen }) {
         {/* Main row */}
         <div className="max-w-[1280px] mx-auto h-[72px] px-4 md:px-8 flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3 z-50" onClick={close}>
-            <img src={siteData.brand.logo} alt="Invent Fine Art logo" className="w-9 h-9 object-contain rounded-[2px]" width="36" height="36" />
+            <img src={siteData.brand.logo} alt="Invent Fine Art logo" className="w-12 h-12 object-contain rounded-[2px]" width="36" height="36" />
             <span>
               <span className="font-display text-lg md:text-xl font-medium tracking-wide text-text block leading-tight whitespace-nowrap">
                 INVENT FINE ART

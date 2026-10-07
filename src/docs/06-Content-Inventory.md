@@ -9,7 +9,7 @@ Rule: never edit `old data/`. Copy → optimise → use in `frontend/public/asse
 |-------|-------|--------|
 | Brand | Invent Fine Art | ✅ |
 | Tagline | Reinventing spaces through Innovations in Art | ✅ |
-| Founded | 2008 (homepage) / 2009 (About page) | ⚠ client to confirm |
+| Founded | 2009 (confirmed by owner decision 2026-10-07) | ✅ |
 | Certification | ISO 9001 : 2008 Certified | ✅ (confirm still valid/renewed) |
 | Head office | Kandivali East, Mumbai, Maharashtra | ✅ |
 | Factory | Near Jag Mata Mandir, Vasai/Virar, Maharashtra (19.4196725, 72.7856904) | ✅ |
@@ -91,7 +91,7 @@ Image processing spec:
 
 | # | Gap | Owner | Status |
 |---|-----|-------|--------|
-| 1 | Confirm founding year (2008 vs 2009) | Client | ⬜ |
+| 1 | Confirm founding year (2008 vs 2009) | Client | ✅ Confirmed 2009 |
 | 2 | Social media URLs | Client | ⬜ |
 | 3 | Transparent/vector logo | Client | ⬜ |
 | 4 | Captions / project names / locations for artworks (none in source) | Client (optional) | ⬜ |

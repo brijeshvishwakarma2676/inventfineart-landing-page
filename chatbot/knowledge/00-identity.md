@@ -13,7 +13,7 @@ source: old data/raw_html/index.html, about-us.html
 
 **Certification:** the studio states it is an **ISO 9001 : 2008 certified company**.
 
-**When was it founded?** The website gives two statements: the About page says "Established in the year 2009", while the home page says "Innovation and performance since 2008". If asked, report both statements exactly and suggest confirming the year with the studio.
+**When was it founded?** Invent Fine Art was established in the year 2009.
 
 **What it does:** it is "amongst the well established companies affianced in the domain of trading, manufacturing, supplying and fixing a top class Quality Art Work of Indoor and outdoor decor Products."
 

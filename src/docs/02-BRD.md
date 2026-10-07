@@ -3,7 +3,7 @@
 **Version:** 0.1 · **Date:** 2026-10-05
 
 ## 1. Business Background
-Invent Fine Art (est. 2008/09, ISO 9001:2008 certified) designs, manufactures and installs sculptures, wall murals, water fountains, GRC facades, planters, gate grills and artificial rockery for residential, hospitality and corporate projects. Head office: Kandivali East, Mumbai. Factory: near Jag Mata Mandir, Vasai/Virar.
+Invent Fine Art (est. 2009, ISO 9001:2008 certified) designs, manufactures and installs sculptures, wall murals, water fountains, GRC facades, planters, gate grills and artificial rockery for residential, hospitality and corporate projects. Head office: Kandivali East, Mumbai. Factory: near Jag Mata Mandir, Vasai/Virar.
 
 The current site is dated, has a non-mobile-first layout, repetitive near-identical gallery pages, and obsolete social links (Google+). The rebuild keeps the 12-page structure (so existing links and search ranking carry over) but gives every page a distinct, modern composition.
 
@@ -72,7 +72,7 @@ Alternative (if client prefers): POST to Formspree/Web3Forms endpoint and show c
 |------|--------|-----------|
 | 47 MB of unoptimised images | Slow load | WebP conversion, thumbnails, lazy load |
 | No captions/project names | Weak gallery storytelling | Category labels + numbering; client may add captions later |
-| Legacy stats ("2008" vs "2009") inconsistent | Credibility | Client to confirm founding year |
+| Legacy stats ("2008" vs "2009") inconsistent | Credibility | Confirmed 2009 (owner decision 2026-10-07) |
 | Client logos are JPG on white | Look off on dark theme | Place on light cards or grayscale-to-colour tiles |
 
 ## 9. Success Criteria

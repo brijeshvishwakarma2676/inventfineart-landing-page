@@ -74,7 +74,7 @@ export function Composer({
   return (
     <div className="border-t border-line bg-bg p-3 sm:p-4">
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <div className="relative flex items-end gap-2 bg-bg-raised border border-line rounded-[2px] focus-within:border-accent-2 transition-colors px-3 py-1.5">
+        <div className="relative flex items-end gap-2.5 bg-bg-raised border border-line rounded-[2px] focus-within:border-accent-2 transition-colors duration-200 px-3.5 py-1.5">
           <textarea
             ref={textareaRef}
             rows={1}
@@ -87,7 +87,7 @@ export function Composer({
             aria-label={placeholder}
             aria-describedby="chat-disclaimer chat-char-counter"
             maxLength={charLimit}
-            className="w-full bg-transparent text-text placeholder:text-text-dim/70 text-sm leading-relaxed resize-none outline-none focus-visible:outline-none min-h-[40px] max-h-[120px] py-2"
+            className="chat-composer-input w-full bg-transparent text-text placeholder:text-text-dim/60 text-sm leading-relaxed resize-none border-0 p-0 py-2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none caret-accent-2 min-h-[40px] max-h-[120px]"
           />
 
           <div className="flex items-center gap-1.5 shrink-0 pb-1">

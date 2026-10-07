@@ -65,14 +65,24 @@ export function MessageList({
         aria-busy={status === 'streaming'}
         tabIndex={0}
         aria-label="Conversation history"
-        className="h-full overflow-y-auto px-4 py-4 space-y-1 focus:outline-none focus-visible:ring-1 focus-visible:ring-accent-2/50"
+        className="h-full overflow-y-auto px-4 py-4 space-y-1 focus:outline-none focus-visible:ring-1 focus-visible:ring-accent-2/50 overscroll-contain"
       >
         {/* Welcome state if no conversation yet */}
         {displayMessages.length === 0 && (
           <div className="chat-message-enter flex flex-col items-start mt-2">
-            <span className="text-[10px] tracking-[0.14em] uppercase font-body text-accent-2 mb-1 ml-0.5 select-none">
-              {uiCopy.messages.studioLabel}
-            </span>
+            <div className="flex items-center gap-2 mb-1.5 ml-0.5 select-none">
+              <img
+                src="/assets/bot/bot-animated.webp"
+                alt=""
+                aria-hidden="true"
+                width="22"
+                height="22"
+                className="w-5 h-5 object-contain shrink-0"
+              />
+              <span className="text-[10px] tracking-[0.14em] uppercase font-body text-accent-2">
+                {uiCopy.messages.studioLabel}
+              </span>
+            </div>
             <div className="bg-bg-raised text-text border border-line p-3.5 rounded-[2px] rounded-bl-none max-w-[92%]">
               <p className="text-sm font-display leading-relaxed text-text">
                 {uiCopy.welcome.greeting}

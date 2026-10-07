@@ -54,7 +54,7 @@ const PILLARS = [
 ];
 
 const METRICS = [
-  { value: '15+ Years', label: 'Continuous commissions since 2008' },
+  { value: '15+ Years', label: 'Continuous commissions since 2009' },
   { value: '30+ Partners', label: 'Hospitality, corporate & developer brands' },
   { value: '166+ Works', label: 'Documented installations across India' },
   { value: 'ISO 9001', label: 'Certified fabrication & quality systems' },

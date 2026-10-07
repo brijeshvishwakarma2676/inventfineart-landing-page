@@ -19,6 +19,7 @@ Code: `frontend/` (Vite + React 19)
 | 09 | [Master Build Prompt](09-BUILD-PROMPT.md) | Standalone prompt to build the whole site | Ready |
 | 10 | [Design Rules & Audit](10-Design-Rules-and-Audit.md) | Root causes, banned patterns, audit commands | Ready |
 | 12 | [Chatbot UI Master Prompt](12-CHATBOT-UI-PROMPT.md) | Prompt to build the floating chatbot UI (mock service; no backend) | Ready |
+| 13 | [About Page + Awards Prompt](13-ABOUT-PAGE-PROMPT.md) | Gap analysis of `/about` and a build prompt incl. a data-driven Awards section | Ready |
 | 11 | [Multi-page Migration Prompt](11-MULTIPAGE-MIGRATION-PROMPT.md) | Prompt to migrate the existing single-page build to 13 routes | Ready |
 
 ## Build Progress Tracker
@@ -48,12 +49,14 @@ Code: `frontend/` (Vite + React 19)
 | D10 | Newsletter signup | Static, disabled until an endpoint (`footer.newsletter.endpoint`) is chosen | ⬜ service pending |
 | D7 | Styling stack | **Tailwind CSS v4.3** (`@tailwindcss/vite`) | ✅ |
 | D8 | Single page vs multi-page | **Multi-page, 13 routes + 404** | ✅ |
+| D12 | Real awards list + certificate scan/number (About page ships **mock** awards, flagged `mock: true`, until replaced). Founding year **decided: 2009** (2026-10-07) | Mock awards behind `SHOW_MOCK_AWARDS`; prebuild warns | ⬜ awards / ✅ year |
 | D9 | Build-time prerender of all routes (SEO for non-JS crawlers) | Optional; recommended | ⬜ |
 
 ## Change Log
 
 | Date | Change |
 |------|--------|
+| 2026-10-07 | **About page enhancement & dedicated awards section (Doc 13):** Added `AboutStatsStrip` (5 hairline proof cells), sticky in-page sub-navigation with `IntersectionObserver`, rewritten studio story from original `about-us.html`, craft & materials strip linking to 6 gallery routes, rewritten process and facility units from original context, dedicated Certifications & Awards section (`AwardsSection.jsx`) with ISO 9001:2008 card + mock awards gated behind `SHOW_MOCK_AWARDS` and prebuild warning (`scripts/check-mock-data.mjs`), client trust strip (`ClientMarquee`), visit/location block (`AboutVisitBlock`), and AboutPage JSON-LD. Founding year standardized to **2009** across the site (Decision D12). |
 | 2026-10-05 | Initial documentation set created from archived site data. |
 | 2026-10-06 | **Chatbot foundation:** `chatbot/` (knowledge md files, prompts, eval questions, SOURCES.md, README), `api/chat.js` stub, `api/_lib/knowledge.generated.js` built by `scripts/build-knowledge.mjs` (also runs as `prebuild`), `.env.example`, empty `src/chatbot/` UI folders, `/api` excluded from the SPA rewrite, `environments/` + `.env.*` git-ignored. Key stays server-side (Vercel function), never in the browser. **Knowledge is built from the original `raw_html`, not from the archive summaries.** Added `12-CHATBOT-UI-PROMPT.md`. **Content-integrity finding:** several details in the new site copy are not in the original website (see `chatbot/SOURCES.md` → Known gaps); they need correcting/confirming. |
 | 2026-10-06 | **Hero slideshow freeze fixed.** Cause: it paused on hover/focus of the whole full-screen section (cursor resting on the hero = never advanced; on touch a tap's emulated hover paused it permanently; a focused dot kept it paused). Now: no hover/tap pause; restartable per-slide timer; Pause/Play button; pause only on keyboard focus-visible, hidden tab and while the intro plays; reduced motion = no autoplay; next image preloaded before advancing; 32px-tall dot hit areas. Verified on desktop, touch, slow 3G, reduced motion and with the intro. |

@@ -26,4 +26,4 @@ The chatbot follows the original. These pieces of new-site copy are NOT supporte
 2. "Rust proof / weatherproof / corrosion-resistant" claims (home page feature, FAQ). In the original, the "Rust proof" box talks about grills being available in numerous designs and customisations.
 3. Factory location shown as "Near Jag Mata Mandir, Vasai/Virar". The original says "Opp. Jag Mata Mandir, Wagholi Road, Nalasopra West, Thane - 401203".
 4. The FAQ answers about materials and outdoor suitability, and the About "process" step descriptions, which go beyond the original wording.
-5. Founding year: original says both "since 2008" (home) and "established 2009" (About).
+5. Founding year: confirmed as 2009 across the site (owner decision 2026-10-07).
