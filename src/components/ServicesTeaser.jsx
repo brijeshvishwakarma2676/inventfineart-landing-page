@@ -43,7 +43,7 @@ export function ServicesTeaser() {
                     className="group"
                   >
                     <Link
-                      to="/services"
+                      to={`/services#${s.slug}`}
                       className={`flex items-baseline justify-between py-4 lg:py-5 transition-colors cursor-pointer ${
                         isActive ? 'text-text' : 'text-text-dim hover:text-text'
                       }`}
@@ -150,7 +150,7 @@ export function ServicesTeaser() {
                 {/* Direct Actions */}
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
                   <Link
-                    to="/services"
+                    to={`/services#${activeService.slug}`}
                     className="inline-flex items-center gap-2 font-body text-sm font-semibold text-accent-light hover:text-text transition-colors"
                   >
                     View in services catalog <ArrowIcon />
@@ -213,7 +213,7 @@ export function ServicesTeaser() {
                     </p>
                     <div className="flex flex-wrap items-center gap-4 pt-1">
                       <Link
-                        to="/services"
+                        to={`/services#${s.slug}`}
                         className="inline-flex items-center gap-1.5 font-body text-xs font-semibold text-accent-light hover:text-text transition-colors"
                       >
                         All details <ArrowIcon className="w-3.5 h-3.5" />
